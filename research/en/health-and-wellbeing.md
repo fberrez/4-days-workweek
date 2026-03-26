@@ -83,6 +83,44 @@ Comprehensive research compilation based on global trials, academic studies, and
 - **54% found it easier to balance work with household jobs** (Autonomy Institute / UK pilot, 2023).
 - **62% reported it easier to combine work with social life** (Autonomy Institute / UK pilot, 2023).
 
+<div style="margin: 2em 0;">
+
+<svg viewBox="0 0 680 320" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Work-Life Balance Improvements chart">
+  <rect width="680" height="320" rx="8" fill="#f5f4ed"/>
+  <text x="340" y="35" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#31332e">Work-Life Balance Improvements</text>
+  <text x="340" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#31332e" opacity="0.6">UK 4-Day Workweek Pilot (Autonomy Institute, 2023)</text>
+  <!-- Grid lines -->
+  <line x1="260" y1="75" x2="260" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="360" y1="75" x2="360" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="460" y1="75" x2="460" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="560" y1="75" x2="560" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="660" y1="75" x2="660" y2="280" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Axis labels -->
+  <text x="260" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">0%</text>
+  <text x="360" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">20%</text>
+  <text x="460" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">40%</text>
+  <text x="560" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">60%</text>
+  <text x="660" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">80%</text>
+  <!-- Bar 1: Men's childcare time +27% -->
+  <text x="250" y="108" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Men's childcare time</text>
+  <rect x="260" y="90" width="135" height="28" rx="4" fill="#46673e"/>
+  <text x="400" y="109" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+27%</text>
+  <!-- Bar 2: Care/work balance +60% -->
+  <text x="250" y="158" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Care/work balance</text>
+  <rect x="260" y="140" width="300" height="28" rx="4" fill="#46673e"/>
+  <text x="565" y="159" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+60%</text>
+  <!-- Bar 3: Easier household tasks +54% -->
+  <text x="250" y="208" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Easier household tasks</text>
+  <rect x="260" y="190" width="270" height="28" rx="4" fill="#46673e"/>
+  <text x="535" y="209" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+54%</text>
+  <!-- Bar 4: Social/work balance +62% -->
+  <text x="250" y="258" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Social/work balance</text>
+  <rect x="260" y="240" width="310" height="28" rx="4" fill="#46673e"/>
+  <text x="575" y="259" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+62%</text>
+</svg>
+
+</div>
+
 ### Personal Development and Hobbies
 
 - **72% of participants in the Valencia trial devoted more time to friends** (Valencia City Council, 2023).
@@ -181,6 +219,53 @@ Comprehensive research compilation based on global trials, academic studies, and
 - **Job satisfaction**: Increased from 71% to 96%
 - **Joy in work**: Rose from 34% to 86%
 - Improvements were **sustained at 6-month and 12-month follow-up** with no changes in patient safety, satisfaction, or hospital-acquired conditions (PubMed, 2024).
+
+<div style="margin: 2em 0;">
+
+<svg viewBox="0 0 680 370" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Healthcare Burnout Transformation before and after chart">
+  <rect width="680" height="370" rx="8" fill="#f5f4ed"/>
+  <text x="340" y="35" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#31332e">Healthcare Burnout Transformation</text>
+  <text x="340" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#31332e" opacity="0.6">38 Healthcare Leaders, USA (PubMed, 2024)</text>
+  <!-- Legend -->
+  <rect x="220" y="70" width="14" height="14" rx="3" fill="#d97706"/>
+  <text x="240" y="82" font-family="sans-serif" font-size="12" fill="#31332e">Before</text>
+  <rect x="360" y="70" width="14" height="14" rx="3" fill="#46673e"/>
+  <text x="380" y="82" font-family="sans-serif" font-size="12" fill="#31332e">After</text>
+  <!-- Grid lines -->
+  <line x1="180" y1="100" x2="180" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="280" y1="100" x2="280" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="380" y1="100" x2="380" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="480" y1="100" x2="480" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="580" y1="100" x2="580" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="680" y1="100" x2="680" y2="330" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Axis labels -->
+  <text x="180" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">0%</text>
+  <text x="280" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">20%</text>
+  <text x="380" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">40%</text>
+  <text x="480" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">60%</text>
+  <text x="580" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">80%</text>
+  <text x="680" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">100%</text>
+  <!-- Burnout: 61% -> 4% -->
+  <text x="170" y="127" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Burnout</text>
+  <rect x="180" y="110" width="305" height="24" rx="4" fill="#d97706"/>
+  <text x="492" y="127" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">61%</text>
+  <rect x="180" y="138" width="20" height="24" rx="4" fill="#46673e"/>
+  <text x="207" y="155" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">4%</text>
+  <!-- Job Satisfaction: 71% -> 96% -->
+  <text x="170" y="202" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Job Satisfaction</text>
+  <rect x="180" y="185" width="355" height="24" rx="4" fill="#d97706"/>
+  <text x="542" y="202" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">71%</text>
+  <rect x="180" y="213" width="480" height="24" rx="4" fill="#46673e"/>
+  <text x="665" y="230" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">96%</text>
+  <!-- Joy in Work: 34% -> 86% -->
+  <text x="170" y="277" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Joy in Work</text>
+  <rect x="180" y="260" width="170" height="24" rx="4" fill="#d97706"/>
+  <text x="357" y="277" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">34%</text>
+  <rect x="180" y="288" width="430" height="24" rx="4" fill="#46673e"/>
+  <text x="617" y="305" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">86%</text>
+</svg>
+
+</div>
 
 ### Burnout Across Global Trials
 

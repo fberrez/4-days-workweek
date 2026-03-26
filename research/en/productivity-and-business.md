@@ -107,6 +107,40 @@ lang: "en"
 
 ## 2. Productivity Metrics
 
+<div style="margin: 2em 0;">
+<svg viewBox="0 0 600 260" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Productivity Gains Across Trials">
+  <rect width="600" height="260" fill="#f5f4ed" rx="8"/>
+  <text x="300" y="32" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#31332e">Productivity Gains Across Trials</text>
+  <!-- Grid lines -->
+  <line x1="220" y1="50" x2="220" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="310" y1="50" x2="310" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="400" y1="50" x2="400" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="490" y1="50" x2="490" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Axis labels -->
+  <text x="220" y="248" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">0%</text>
+  <text x="310" y="248" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">10%</text>
+  <text x="400" y="248" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">20%</text>
+  <text x="490" y="248" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">30%</text>
+  <text x="580" y="248" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">40%</text>
+  <!-- Microsoft Japan +39.9% -->
+  <text x="210" y="78" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Microsoft Japan</text>
+  <rect x="220" y="62" width="287" height="24" fill="#9a462a" rx="4"/>
+  <text x="513" y="79" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">+39.9%</text>
+  <!-- UK Pilot Revenue +35% -->
+  <text x="210" y="118" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">UK Pilot Revenue</text>
+  <rect x="220" y="102" width="252" height="24" fill="#9a462a" rx="4"/>
+  <text x="478" y="119" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">+35%</text>
+  <!-- Elephant Ventures +25% -->
+  <text x="210" y="158" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Elephant Ventures</text>
+  <rect x="220" y="142" width="180" height="24" fill="#9a462a" rx="4"/>
+  <text x="406" y="159" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">+25%</text>
+  <!-- Perpetual Guardian +20% -->
+  <text x="210" y="198" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Perpetual Guardian</text>
+  <rect x="220" y="182" width="144" height="24" fill="#9a462a" rx="4"/>
+  <text x="370" y="199" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">+20%</text>
+</svg>
+</div>
+
 | Study / Company | Year | Productivity Change | Measurement |
 |---|---|---|---|
 | Microsoft Japan | 2019 | **+39.9%** | Sales per employee |
@@ -178,6 +212,35 @@ lang: "en"
 ---
 
 ## 5. Employee Retention and Recruitment
+
+<div style="margin: 2em 0;">
+<svg viewBox="0 0 600 220" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Turnover Reduction">
+  <rect width="600" height="220" fill="#f5f4ed" rx="8"/>
+  <text x="300" y="32" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#31332e">Turnover Reduction</text>
+  <!-- Grid lines -->
+  <line x1="220" y1="50" x2="220" y2="190" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="310" y1="50" x2="310" y2="190" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="400" y1="50" x2="400" y2="190" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="490" y1="50" x2="490" y2="190" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Axis labels -->
+  <text x="220" y="208" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">0%</text>
+  <text x="310" y="208" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">-20%</text>
+  <text x="400" y="208" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">-40%</text>
+  <text x="490" y="208" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#31332e">-60%</text>
+  <!-- UK Pilot -57% -->
+  <text x="210" y="78" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">UK Pilot</text>
+  <rect x="220" y="62" width="256.5" height="24" fill="#9a462a" rx="4"/>
+  <text x="483" y="79" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">-57%</text>
+  <!-- Awin -33% -->
+  <text x="210" y="118" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Awin</text>
+  <rect x="220" y="102" width="148.5" height="24" fill="#9a462a" rx="4"/>
+  <text x="375" y="119" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">-33%</text>
+  <!-- Atom Bank -22% -->
+  <text x="210" y="158" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Atom Bank</text>
+  <rect x="220" y="142" width="99" height="24" fill="#9a462a" rx="4"/>
+  <text x="325" y="159" font-family="sans-serif" font-size="12" font-weight="bold" fill="#31332e">-22%</text>
+</svg>
+</div>
 
 ### Turnover Reduction
 

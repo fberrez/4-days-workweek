@@ -278,6 +278,35 @@ Suivre ces indicateurs clés avant, pendant et après le pilote :
 
 ## 5. Secteurs où cela fonctionne
 
+<div style="margin: 2rem 0;">
+<svg viewBox="0 0 640 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect width="640" height="320" rx="8" fill="#f5f4ed"/>
+  <text x="320" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#31332e">Secteurs ayant adopt&#233; avec succ&#232;s</text>
+  <!-- Row 1 -->
+  <rect x="20" y="56" width="290" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="165" y="84" text-anchor="middle" font-size="15" font-weight="bold" fill="#9a462a">Technologie</text>
+  <text x="165" y="108" text-anchor="middle" font-size="13" fill="#31332e">Microsoft Japan</text>
+  <text x="165" y="136" text-anchor="middle" font-size="28" font-weight="bold" fill="#46673e">+40%</text>
+  <text x="165" y="160" text-anchor="middle" font-size="12" fill="#31332e">productivit&#233;</text>
+  <rect x="330" y="56" width="290" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="475" y="84" text-anchor="middle" font-size="15" font-weight="bold" fill="#9a462a">Finance</text>
+  <text x="475" y="108" text-anchor="middle" font-size="13" fill="#31332e">Atom Bank</text>
+  <text x="475" y="136" text-anchor="middle" font-size="28" font-weight="bold" fill="#46673e">+49%</text>
+  <text x="475" y="160" text-anchor="middle" font-size="12" fill="#31332e">candidatures</text>
+  <!-- Row 2 -->
+  <rect x="20" y="190" width="290" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="165" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#9a462a">Gouvernement</text>
+  <text x="165" y="242" text-anchor="middle" font-size="13" fill="#31332e">Islande</text>
+  <text x="165" y="270" text-anchor="middle" font-size="28" font-weight="bold" fill="#46673e">86%</text>
+  <text x="165" y="294" text-anchor="middle" font-size="12" fill="#31332e">de la main-d'&#339;uvre a adopt&#233;</text>
+  <rect x="330" y="190" width="290" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="475" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#9a462a">Services</text>
+  <text x="475" y="242" text-anchor="middle" font-size="13" fill="#31332e">Perpetual Guardian</text>
+  <text x="475" y="270" text-anchor="middle" font-size="28" font-weight="bold" fill="#46673e">+20%</text>
+  <text x="475" y="294" text-anchor="middle" font-size="12" fill="#31332e">productivit&#233;</text>
+</svg>
+</div>
+
 ### Technologie
 
 - **Microsoft Japan (2019) :** augmentation de la productivité de 40 %, économies d'électricité de 23 %, 59 % de pages imprimées en moins. 92,1 % des employés ont apprécié le changement. ([NPR](https://www.npr.org/2019/11/04/776163853/microsoft-japan-says-4-day-workweek-boosted-workers-productivity-by-40))
@@ -517,6 +546,34 @@ La semaine de 4 jours offre des co-bénéfices environnementaux significatifs, s
 ## 10. Résumé des statistiques clés
 
 Un tableau de référence rapide des données les plus convaincantes pour créer du contenu persuasif :
+
+<div style="margin: 2rem 0;">
+<svg viewBox="0 0 640 280" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect width="640" height="280" rx="8" fill="#f5f4ed"/>
+  <text x="320" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#31332e">Taux de continuation apr&#232;s l'essai</text>
+  <!-- Bar: Buffer 100% -->
+  <text x="170" y="76" text-anchor="end" font-size="13" fill="#31332e">Buffer</text>
+  <rect x="180" y="62" width="400" height="24" rx="4" fill="#46673e"/>
+  <text x="588" y="80" text-anchor="start" font-size="13" font-weight="bold" fill="#31332e">100%</text>
+  <!-- Bar: UK Pilot 92% -->
+  <text x="170" y="120" text-anchor="end" font-size="13" fill="#31332e">Pilote UK (1 an apr&#232;s)</text>
+  <rect x="180" y="106" width="368" height="24" rx="4" fill="#46673e"/>
+  <text x="556" y="124" text-anchor="start" font-size="13" font-weight="bold" fill="#31332e">92%</text>
+  <!-- Bar: Nature Study 90% -->
+  <text x="170" y="164" text-anchor="end" font-size="13" fill="#31332e">&#201;tude Nature</text>
+  <rect x="180" y="150" width="360" height="24" rx="4" fill="#46673e"/>
+  <text x="548" y="168" text-anchor="start" font-size="13" font-weight="bold" fill="#31332e">90%</text>
+  <!-- Bar: Germany 73% -->
+  <text x="170" y="208" text-anchor="end" font-size="13" fill="#31332e">Allemagne (2 ans)</text>
+  <rect x="180" y="194" width="292" height="24" rx="4" fill="#46673e"/>
+  <text x="480" y="212" text-anchor="start" font-size="13" font-weight="bold" fill="#31332e">73%</text>
+  <!-- Baseline -->
+  <line x1="180" y1="232" x2="580" y2="232" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="180" y="252" text-anchor="middle" font-size="11" fill="#31332e">0%</text>
+  <text x="380" y="252" text-anchor="middle" font-size="11" fill="#31332e">50%</text>
+  <text x="580" y="252" text-anchor="middle" font-size="11" fill="#31332e">100%</text>
+</svg>
+</div>
 
 | Statistique | Source | Année |
 |-----------|--------|------|
