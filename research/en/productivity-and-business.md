@@ -114,10 +114,10 @@ lang: "en"
 new Chart(document.getElementById('chart-productivity-gains'), {
   type: 'bar',
   data: {
-    labels: ['Microsoft Japan', 'UK Pilot Revenue', 'Elephant Ventures', 'Perpetual Guardian'],
+    labels: ['Microsoft Japan', 'Elephant Ventures', 'Perpetual Guardian'],
     datasets: [{
-      label: 'Productivity / Revenue Increase (%)',
-      data: [39.9, 35, 25, 20],
+      label: 'Productivity Increase (%)',
+      data: [39.9, 25, 20],
       backgroundColor: '#9a462a',
       borderRadius: 4,
       barThickness: 28,
