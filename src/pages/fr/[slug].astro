@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
 import { getCollection, render } from "astro:content";
 import { t, slugFromId } from "../../i18n";
 
@@ -14,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
-const { Content } = await render(article);
+const { Content, headings } = await render(article);
 const slug = slugFromId(article.id);
 ---
 
@@ -23,7 +24,9 @@ const slug = slugFromId(article.id);
     <a href="/fr" class="text-sm text-gray-400 hover:text-gray-600 transition-colors">&larr; {t(lang, "back")}</a>
   </div>
 
-  <article class="prose prose-gray max-w-none prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-table:text-sm prose-th:text-left prose-a:text-[#9a462a] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-[#9a462a]/30 prose-blockquote:text-gray-500">
+  <TableOfContents headings={headings} label="Table des matières" />
+
+  <article class="prose prose-gray max-w-none prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-table:text-sm prose-th:text-left prose-blockquote:border-accent/30 prose-blockquote:text-gray-500">
     <Content />
   </article>
 </Layout>

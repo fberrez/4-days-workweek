@@ -1,0 +1,34 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  label?: string;
+}
+
+const { headings, label = "Table of contents" } = Astro.props;
+
+// Only show h2 and h3
+const filtered = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+if (filtered.length === 0) return;
+---
+
+<details class="mb-10 border border-gray-200 rounded-lg" open>
+  <summary class="px-5 py-3 cursor-pointer text-sm font-semibold text-gray-500 hover:text-gray-900 select-none">
+    {label}
+  </summary>
+  <nav class="toc px-5 pb-4 ml-4" aria-label={label}>
+    {filtered.map((h) => (
+      <a
+        href={`#${h.slug}`}
+        class:list={[h.depth === 3 && "ml-4"]}
+      >
+        {h.text}
+      </a>
+    ))}
+  </nav>
+</details>

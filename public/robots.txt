@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://4-days-workweek-production.up.railway.app/sitemap-index.xml
