@@ -1,3 +1,9 @@
+---
+title: "Health & Wellbeing"
+description: "Mental health, burnout reduction, gender equality, and the science of recovery."
+order: 2
+---
+
 # Health, Wellbeing, and Work-Life Balance Benefits of the 4-Day Workweek
 
 Comprehensive research compilation based on global trials, academic studies, and government-backed pilot programmes. All data points include source attribution and year.

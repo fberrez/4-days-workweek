@@ -1,3 +1,9 @@
+---
+title: "Implementation Guide"
+description: "Models, roadmaps, counterarguments, and expert advice for transitioning to a 4-day week."
+order: 4
+---
+
 # 4-Day Workweek: Implementation, Challenges, and Counterarguments
 
 > Comprehensive research compiled for building a persuasive website advocating for the 4-day workweek. All findings include sources, years, and specific data points.
