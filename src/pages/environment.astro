@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Work/Life | Environment & Society" description="How the 4-day workweek reduces carbon emissions, cuts commuting, and builds stronger communities." active="environment">
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-8 mb-24">
+    <div class="flex flex-col md:flex-row gap-16 items-start">
+      <div class="md:w-3/5">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-sm font-semibold tracking-wider mb-6">ENVIRONMENT &amp; SOCIETY</span>
+        <h1 class="font-headline text-5xl md:text-7xl font-medium leading-[1.1] mb-8 text-on-surface tracking-tight">
+          The Silent Catalyst for a <span class="italic text-primary">Greener Planet</span>.
+        </h1>
+        <p class="text-xl text-on-surface-variant leading-relaxed max-w-2xl">
+          A slower pace isn't just a personal choice; it's a structural necessity for a thriving world. When we reclaim our time, we restore our environment and mend the social fabric.
+        </p>
+      </div>
+      <div class="md:w-2/5 relative">
+        <div class="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl rotate-3 bg-surface-container-high">
+          <img class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" alt="Sustainable forest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrcgshKCnsiR2qKGPO3oLrkLe7MdSbVH7bRPRmE5hKue4L4JIWEbMhKajzfdPlqNTyC36FdzgCeemtR230H3bufODY7BOMwO3fxBYuMVmhPVSIUNpZDN_DTSCnXTQTcZMDTIbT7eWIlc4iDX6cxTMKH2NA8tiq7tme0JC-Okt9PgeFdonKrerr31SRVYuiGamgTiPzLaUqmubDxaQ1SrlQj1c6cQ1vESksXKNnSFSBbNl_hmrNHY1pJoOPNYj3hLezuLF5vfx_TCo" />
+        </div>
+        <div class="absolute -bottom-8 -left-8 bg-tertiary-container p-6 rounded-2xl shadow-xl max-w-[200px] -rotate-3">
+          <span class="material-symbols-outlined text-4xl text-on-tertiary-container mb-2">eco</span>
+          <p class="font-headline italic text-lg text-on-tertiary-container leading-tight">Reduction in carbon footprint begins with a slower calendar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid -->
+  <section class="max-w-7xl mx-auto px-8 mb-32">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Carbon Reduction Card -->
+      <div class="md:col-span-8 bg-surface-container-low rounded-3xl p-12 flex flex-col justify-between min-h-[400px]">
+        <div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">compost</span>
+            </div>
+            <h3 class="font-headline text-3xl font-semibold">Carbon Reduction</h3>
+          </div>
+          <p class="text-lg text-on-surface-variant leading-relaxed mb-8 max-w-xl">
+            Platform London estimates a UK-wide 4-day week could cut 127 million tonnes of CO2 per year. Juliet Schor's OECD research shows a 10% reduction in work hours leads to an 8.6&ndash;14.6% drop in carbon footprint.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 bg-surface-container-lowest rounded-full text-sm font-medium border border-outline-variant/10">127M Tonnes CO2</span>
+          <span class="px-4 py-2 bg-surface-container-lowest rounded-full text-sm font-medium border border-outline-variant/10">27% Fewer Commutes</span>
+        </div>
+      </div>
+
+      <!-- Energy Card -->
+      <div class="md:col-span-4 bg-primary text-on-primary rounded-3xl p-12 flex flex-col items-center justify-center text-center overflow-hidden relative group">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+        <span class="material-symbols-outlined text-7xl mb-6 group-hover:scale-110 transition-transform duration-500" style="font-variation-settings: 'FILL' 1;">energy_savings_leaf</span>
+        <h3 class="font-headline text-3xl font-bold mb-4 italic leading-tight">Energy Reclaimed</h3>
+        <p class="text-on-primary/80">Microsoft Japan cut electricity by 23% and paper use by 60% during their 4-day week trial.</p>
+      </div>
+
+      <!-- Sustainable Nutrition Card -->
+      <div class="md:col-span-4 bg-secondary-container text-on-secondary-container rounded-3xl p-10">
+        <div class="w-12 h-12 rounded-xl bg-on-secondary-container/10 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-on-secondary-container">restaurant</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-4">Sustainable Living</h3>
+        <p class="text-on-secondary-container/80 leading-relaxed">
+          Valencia trial participants reported 58% reduction in NO2 pollution. More time at home means fewer convenience meals, less packaging waste, and more seasonal, local food choices.
+        </p>
+      </div>
+
+      <!-- Global Movement Card -->
+      <div class="md:col-span-8 bg-surface-container-lowest rounded-3xl p-10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] flex flex-col md:flex-row gap-8 items-center border border-outline-variant/10">
+        <div class="w-full md:w-1/2 h-48 bg-surface-container rounded-2xl overflow-hidden">
+          <img class="w-full h-full object-cover" alt="World map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd9k0XtdAOclEOYxFJdNnZv6Uh_ryMY0KdObqLXBc7-SRfPf8FzfiRKM_iVfrGZfG2CAcYo8csqaZv6QMgyqtawnM0t1IljiPIlNYYAUmj4ZRmjpemUypmhYUSLjd4Wxxn9uaV6lbTK4fCWq7HTfr5KLY99S3mm3lQ2qbgElEt0V53UyVAlVmiFYDhq6WQyR9G5GIVzTXOHBUq8PNzH9Y1ZAGX2sDCQAM7c4uRqPiEveXZzz47cgKa7SwGc7AgpiRtDNfeKLL81ZM" />
+        </div>
+        <div class="w-full md:w-1/2">
+          <div class="flex items-center gap-2 text-primary mb-2">
+            <span class="material-symbols-outlined text-xl">public</span>
+            <span class="font-label text-xs font-bold uppercase tracking-widest">Global Movement</span>
+          </div>
+          <h3 class="font-headline text-2xl font-bold mb-3">A Borderless Network</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Belgium enshrined the right to a 4-day week in law. Iceland's trials led to 86% workforce adoption. UAE, Japan, Spain, Germany, Portugal, and Scotland are all running government-backed pilots.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="max-w-5xl mx-auto px-8">
+    <div class="bg-tertiary-container rounded-[2rem] p-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-8 opacity-20">
+        <span class="material-symbols-outlined text-9xl text-on-tertiary-container">edit_note</span>
+      </div>
+      <div class="relative z-10 max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="material-symbols-outlined text-on-tertiary-container">gesture</span>
+          <span class="font-headline text-xl italic font-semibold text-on-tertiary-container">The Human Touch</span>
+        </div>
+        <h2 class="font-headline text-4xl font-bold text-on-tertiary-container mb-6">Building a Legacy of Care.</h2>
+        <p class="text-on-tertiary-container/80 text-lg leading-relaxed mb-8">
+          The true benefit of work-life harmony isn't just increased productivity&mdash;it's the capacity to care. To care for our neighbors, our local parks, and the invisible systems that sustain us.
+        </p>
+        <a href="/implementation" class="inline-block bg-on-tertiary-container text-white px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform">
+          Join the Movement
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

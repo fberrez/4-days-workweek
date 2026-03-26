@@ -1,0 +1,40 @@
+---
+interface Props {
+  active?: "movement" | "health" | "environment" | "implementation";
+}
+
+const { active = "movement" } = Astro.props;
+
+const links = [
+  { href: "/", label: "The Movement", id: "movement" },
+  { href: "/health", label: "Health", id: "health" },
+  { href: "/environment", label: "Environment", id: "environment" },
+  { href: "/implementation", label: "Implementation", id: "implementation" },
+] as const;
+---
+
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-on-surface/5 shadow-[0_8px_32px_rgba(49,51,46,0.06)]">
+  <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+    <a href="/" class="text-2xl font-headline italic font-bold text-on-surface hover:scale-[1.02] transition-transform duration-300">
+      Work/Life
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "font-headline text-lg font-medium tracking-tight transition-colors",
+            active === link.id
+              ? "text-primary border-b-2 border-primary pb-1"
+              : "text-on-surface/70 hover:text-on-surface",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <a href="/implementation" class="editorial-gradient text-on-primary px-6 py-2.5 rounded-lg font-medium hover:scale-[1.02] transition-all duration-300">
+      Get Started
+    </a>
+  </div>
+</nav>
