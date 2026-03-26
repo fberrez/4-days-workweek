@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
+# The 4-Day Workweek
+
+Evidence-based research on the benefits of a 4-day workweek, compiled from 60+ global trials, peer-reviewed studies, and government pilot programs.
+
+**Live site:** https://4-days-workweek-production.up.railway.app
+
+## Research topics
+
+| # | Topic | Description |
+|---|-------|-------------|
+| 01 | Productivity & Business | Microsoft Japan (+40%), revenue impacts, retention, case studies |
+| 02 | Health & Wellbeing | Burnout (-71%), stress, sleep, gender equality, WHO data |
+| 03 | Environment & Society | Carbon reduction (127M tonnes), energy, policy, historical context |
+| 04 | Implementation Guide | Models (100-80-100), counterarguments, expert advice |
+
+All research files are in [`/research`](./research) with full source attribution and URLs.
+
+## Languages
+
+- English (default): `/`
+- French: `/fr/`
+
+## Stack
+
+- [Astro](https://astro.build) with content collections
+- [Tailwind CSS](https://tailwindcss.com) v4 + typography plugin
+- Deployed on [Railway](https://railway.com) with sleep mode
+
+## Development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev       # localhost:4321
+npm run build     # production build
+npm run start     # run production server
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Project structure
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+research/
+  en/                     # English markdown research files
+  fr/                     # French markdown research files
+src/
+  components/
+    Nav.astro             # Navigation with language switcher
+    Footer.astro
+  layouts/
+    Layout.astro          # Shared layout with i18n support
+  pages/
+    index.astro           # EN home
+    [slug].astro          # EN article pages
+    fr/
+      index.astro         # FR home
+      fr/[slug].astro     # FR article pages
+  i18n.ts                 # Translations and language utilities
+  content.config.ts       # Astro content collection schema
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## License
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Research is compiled from public sources cited in each document. Code is MIT.

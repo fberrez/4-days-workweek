@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
-import { t, slugFromId } from "../i18n";
+import { t, slugFromId } from "../../i18n";
 
-const lang = "en" as const;
+const lang = "fr" as const;
 
 export async function getStaticPaths() {
-  const articles = (await getCollection("research")).filter((a) => a.data.lang === "en");
+  const articles = (await getCollection("research")).filter((a) => a.data.lang === "fr");
   return articles.map((article) => ({
     params: { slug: slugFromId(article.id) },
     props: { article },
@@ -20,7 +20,7 @@ const slug = slugFromId(article.id);
 
 <Layout title={`${article.data.title} — ${t(lang, "site.title")}`} description={article.data.description} lang={lang} current={slug}>
   <div class="mb-8">
-    <a href="/" class="text-sm text-gray-400 hover:text-gray-600 transition-colors">&larr; {t(lang, "back")}</a>
+    <a href="/fr" class="text-sm text-gray-400 hover:text-gray-600 transition-colors">&larr; {t(lang, "back")}</a>
   </div>
 
   <article class="prose prose-gray max-w-none prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-table:text-sm prose-th:text-left prose-a:text-[#9a462a] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-[#9a462a]/30 prose-blockquote:text-gray-500">

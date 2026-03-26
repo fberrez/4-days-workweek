@@ -2,6 +2,7 @@
 title: "Environment & Society"
 description: "Carbon reduction, energy savings, government policy, and 200 years of working hour trends."
 order: 3
+lang: "en"
 ---
 
 # Environmental and Societal Benefits of the 4-Day Workweek

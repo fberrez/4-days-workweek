@@ -1,8 +1,15 @@
 ---
+import { type Lang, t } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
 ---
 
 <footer class="border-t border-gray-200 mt-20">
   <div class="max-w-3xl mx-auto px-6 py-8 text-sm text-gray-400">
-    <p>Research compiled March 2026. Open source on <a href="https://github.com/fberrez/4-days-workweek" class="underline hover:text-gray-600">GitHub</a>.</p>
+    <p>{t(lang, "footer.text")} <a href="https://github.com/fberrez/4-days-workweek" class="underline hover:text-gray-600">GitHub</a>.</p>
   </div>
 </footer>

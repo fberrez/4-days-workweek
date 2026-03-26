@@ -2,18 +2,25 @@
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import type { Lang } from "../i18n";
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Lang;
   current?: string;
 }
 
-const { title, description = "The evidence-based case for a 4-day workweek.", current } = Astro.props;
+const {
+  title,
+  description = "The evidence-based case for a 4-day workweek.",
+  lang = "en",
+  current,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-white">
+<html lang={lang} class="bg-white">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +32,10 @@ const { title, description = "The evidence-based case for a 4-day workweek.", cu
     <title>{title}</title>
   </head>
   <body class="text-gray-900 antialiased">
-    <Nav current={current} />
+    <Nav lang={lang} current={current} />
     <main class="max-w-3xl mx-auto px-6 py-12">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

@@ -2,6 +2,7 @@
 title: "Implementation Guide"
 description: "Models, roadmaps, counterarguments, and expert advice for transitioning to a 4-day week."
 order: 4
+lang: "en"
 ---
 
 # 4-Day Workweek: Implementation, Challenges, and Counterarguments

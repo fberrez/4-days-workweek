@@ -1,15 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { t, slugFromId } from "../i18n";
+import { t, slugFromId } from "../../i18n";
 
-const lang = "en" as const;
+const lang = "fr" as const;
 const articles = (await getCollection("research"))
   .filter((a) => a.data.lang === lang)
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title={`${t(lang, "site.title")} — Evidence & Research`} lang={lang}>
+<Layout title={`${t(lang, "site.title")} — Recherche & Preuves`} lang={lang}>
   <header class="mb-12">
     <h1 class="font-serif text-4xl font-bold mb-4">{t(lang, "site.title")}</h1>
     <p class="text-lg text-gray-500 leading-relaxed">{t(lang, "site.subtitle")}</p>
@@ -38,7 +38,7 @@ const articles = (await getCollection("research"))
     <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">{t(lang, "nav.research")}</h2>
     <div class="space-y-6">
       {articles.map((article, i) => (
-        <a href={`/${slugFromId(article.id)}`} class="block group">
+        <a href={`/fr/${slugFromId(article.id)}`} class="block group">
           <article class="border border-gray-200 rounded-lg p-6 hover:border-[#9a462a]/30 hover:bg-[#fbf9f4] transition-all">
             <div class="flex items-baseline gap-3 mb-2">
               <span class="text-xs font-mono text-gray-400">{String(i + 1).padStart(2, "0")}</span>

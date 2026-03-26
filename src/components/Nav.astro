@@ -1,33 +1,60 @@
 ---
 import { getCollection } from "astro:content";
+import { type Lang, t, langPrefix, slugFromId } from "../i18n";
 
 interface Props {
+  lang: Lang;
   current?: string;
 }
 
-const { current } = Astro.props;
-const articles = (await getCollection("research")).sort((a, b) => a.data.order - b.data.order);
+const { lang, current } = Astro.props;
+const allArticles = await getCollection("research");
+const articles = allArticles
+  .filter((a) => a.data.lang === lang)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const otherLang: Lang = lang === "en" ? "fr" : "en";
+const prefix = langPrefix(lang);
+const otherPrefix = langPrefix(otherLang);
+
+// Build the equivalent path in the other language
+const currentPath = Astro.url.pathname;
+let otherPath: string;
+if (current) {
+  otherPath = `${otherPrefix}/${current}`;
+} else {
+  otherPath = otherPrefix || "/";
+}
 ---
 
 <nav class="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
   <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="font-serif text-xl font-bold text-gray-900 hover:text-[#9a462a] transition-colors">
-      4-Day Workweek
+    <a href={prefix || "/"} class="font-serif text-xl font-bold text-gray-900 hover:text-[#9a462a] transition-colors">
+      {lang === "en" ? "4-Day Workweek" : "Semaine de 4 jours"}
     </a>
-    <div class="hidden sm:flex items-center gap-6 text-sm">
-      {articles.map((article) => (
-        <a
-          href={`/${article.id}`}
-          class:list={[
-            "transition-colors",
-            current === article.id
-              ? "text-[#9a462a] font-semibold"
-              : "text-gray-500 hover:text-gray-900",
-          ]}
-        >
-          {article.data.title}
-        </a>
-      ))}
+    <div class="flex items-center gap-6">
+      <div class="hidden sm:flex items-center gap-6 text-sm">
+        {articles.map((article) => (
+          <a
+            href={`${prefix}/${slugFromId(article.id)}`}
+            class:list={[
+              "transition-colors",
+              current === slugFromId(article.id)
+                ? "text-[#9a462a] font-semibold"
+                : "text-gray-500 hover:text-gray-900",
+            ]}
+          >
+            {article.data.title}
+          </a>
+        ))}
+      </div>
+      <a
+        href={otherPath}
+        class="text-xs font-mono px-2 py-1 rounded border border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-all"
+        title={otherLang === "fr" ? "Version fran\u00e7aise" : "English version"}
+      >
+        {otherLang.toUpperCase()}
+      </a>
     </div>
   </div>
 </nav>

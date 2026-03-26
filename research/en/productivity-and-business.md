@@ -2,6 +2,7 @@
 title: "Productivity & Business"
 description: "How the 4-day workweek boosts productivity, revenue, and retention across 60+ global trials."
 order: 1
+lang: "en"
 ---
 
 # Productivity and Business Benefits of the 4-Day Workweek

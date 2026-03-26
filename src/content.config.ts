@@ -7,6 +7,7 @@ const research = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number(),
+    lang: z.enum(["en", "fr"]),
   }),
 });
 

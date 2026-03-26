@@ -2,6 +2,7 @@
 title: "Health & Wellbeing"
 description: "Mental health, burnout reduction, gender equality, and the science of recovery."
 order: 2
+lang: "en"
 ---
 
 # Health, Wellbeing, and Work-Life Balance Benefits of the 4-Day Workweek
