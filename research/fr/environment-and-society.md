@@ -1,6 +1,6 @@
 ---
-title: "Environnement et Societe"
-description: "Reduction carbone, economies d'energie, politiques gouvernementales et 200 ans d'evolution du temps de travail."
+title: "Environnement et Société"
+description: "Réduction carbone, économies d'énergie, politiques gouvernementales et 200 ans d'évolution du temps de travail."
 order: 3
 lang: "fr"
 ---

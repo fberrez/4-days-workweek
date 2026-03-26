@@ -1,6 +1,6 @@
 ---
-title: "Guide de mise en oeuvre"
-description: "Modeles, feuilles de route, contre-arguments et conseils d'experts pour passer a la semaine de 4 jours."
+title: "Guide de mise en œuvre"
+description: "Modèles, feuilles de route, contre-arguments et conseils d'experts pour passer à la semaine de 4 jours."
 order: 4
 lang: "fr"
 ---
