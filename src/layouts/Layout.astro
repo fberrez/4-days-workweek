@@ -27,6 +27,10 @@ const enUrl = new URL(slug ? `/${slug}` : "/", Astro.site);
 const frUrl = new URL(slug ? `/fr/${slug}` : "/fr", Astro.site);
 
 const skipLabel = lang === "fr" ? "Aller au contenu" : "Skip to content";
+
+// OG image path
+const ogSlug = current || "home";
+const ogImageUrl = new URL(`/og/${lang}/${ogSlug}.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -49,11 +53,15 @@ const skipLabel = lang === "fr" ? "Aller au contenu" : "Skip to content";
     <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_US"} />
     <meta property="og:locale:alternate" content={lang === "fr" ? "en_US" : "fr_FR"} />
     <meta property="og:site_name" content="4-Day Workweek" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
