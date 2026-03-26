@@ -83,43 +83,38 @@ Compilation exhaustive de recherches basée sur des essais internationaux, des �
 - **54 % ont trouvé plus facile de concilier travail et tâches ménagères** (Autonomy Institute / pilote britannique, 2023).
 - **62 % ont déclaré qu'il était plus facile de concilier travail et vie sociale** (Autonomy Institute / pilote britannique, 2023).
 
-<div style="margin: 2em 0;">
-
-<svg viewBox="0 0 680 320" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphique des améliorations de l'équilibre vie pro/perso">
-  <rect width="680" height="320" rx="8" fill="#f5f4ed"/>
-  <text x="340" y="35" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#31332e">Améliorations de l'équilibre vie pro/perso</text>
-  <text x="340" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#31332e" opacity="0.6">Pilote britannique de la semaine de 4 jours (Autonomy Institute, 2023)</text>
-  <!-- Grid lines -->
-  <line x1="260" y1="75" x2="260" y2="280" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="360" y1="75" x2="360" y2="280" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="460" y1="75" x2="460" y2="280" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="560" y1="75" x2="560" y2="280" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="660" y1="75" x2="660" y2="280" stroke="#e5e7eb" stroke-width="1"/>
-  <!-- Axis labels -->
-  <text x="260" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">0%</text>
-  <text x="360" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">20%</text>
-  <text x="460" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">40%</text>
-  <text x="560" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">60%</text>
-  <text x="660" y="298" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">80%</text>
-  <!-- Bar 1: Temps de garde (hommes) +27% -->
-  <text x="250" y="108" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Temps de garde (hommes)</text>
-  <rect x="260" y="90" width="135" height="28" rx="4" fill="#46673e"/>
-  <text x="400" y="109" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+27%</text>
-  <!-- Bar 2: Équilibre travail/famille +60% -->
-  <text x="250" y="158" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Équilibre travail/famille</text>
-  <rect x="260" y="140" width="300" height="28" rx="4" fill="#46673e"/>
-  <text x="565" y="159" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+60%</text>
-  <!-- Bar 3: Tâches ménagères facilitées +54% -->
-  <text x="250" y="208" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Tâches ménagères facilitées</text>
-  <rect x="260" y="190" width="270" height="28" rx="4" fill="#46673e"/>
-  <text x="535" y="209" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+54%</text>
-  <!-- Bar 4: Équilibre travail/vie sociale +62% -->
-  <text x="250" y="258" text-anchor="end" font-family="sans-serif" font-size="13" fill="#31332e">Équilibre travail/vie sociale</text>
-  <rect x="260" y="240" width="310" height="28" rx="4" fill="#46673e"/>
-  <text x="575" y="259" font-family="sans-serif" font-size="13" font-weight="bold" fill="#46673e">+62%</text>
-</svg>
-
+<div style="margin: 2em 0; max-width: 100%;">
+<canvas id="chart-work-life-balance"></canvas>
 </div>
+<script>
+new Chart(document.getElementById('chart-work-life-balance'), {
+  type: 'bar',
+  data: {
+    labels: ['Temps de garde (hommes)', 'Équilibre travail/famille', 'Tâches ménagères facilitées', 'Équilibre travail/vie sociale'],
+    datasets: [{
+      label: 'Improvement (%)',
+      data: [27, 60, 54, 62],
+      backgroundColor: '#46673e',
+      borderRadius: 4,
+      barThickness: 28,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Améliorations de l\'équilibre vie pro/perso', font: { size: 16, weight: 'bold' }, color: '#31332e', padding: { bottom: 4 } },
+      subtitle: { display: true, text: 'Pilote UK de la semaine de 4 jours (Autonomy Institute, 2023)', color: '#6b7280', font: { size: 12 }, padding: { bottom: 16 } },
+      legend: { display: false },
+      tooltip: { callbacks: { label: (ctx) => '+' + ctx.raw + '%' } }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 80, ticks: { callback: (v) => v + '%', color: '#6b7280' }, grid: { color: '#e5e7eb' } },
+      y: { ticks: { color: '#31332e', font: { size: 13 } }, grid: { display: false } }
+    }
+  }
+});
+</script>
 
 ### Développement personnel et loisirs
 
@@ -220,52 +215,35 @@ Compilation exhaustive de recherches basée sur des essais internationaux, des �
 - **Joie au travail** : hausse de 34 % à 86 %
 - Les améliorations se sont **maintenues lors des suivis à 6 mois et 12 mois**, sans modification de la sécurité des patients, de leur satisfaction ni des infections nosocomiales (PubMed, 2024).
 
-<div style="margin: 2em 0;">
-
-<svg viewBox="0 0 680 370" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphique avant/après de la transformation du burnout dans la santé">
-  <rect width="680" height="370" rx="8" fill="#f5f4ed"/>
-  <text x="340" y="35" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#31332e">Transformation du burnout dans la santé</text>
-  <text x="340" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#31332e" opacity="0.6">38 cadres de santé, États-Unis (PubMed, 2024)</text>
-  <!-- Legend -->
-  <rect x="220" y="70" width="14" height="14" rx="3" fill="#d97706"/>
-  <text x="240" y="82" font-family="sans-serif" font-size="12" fill="#31332e">Avant</text>
-  <rect x="360" y="70" width="14" height="14" rx="3" fill="#46673e"/>
-  <text x="380" y="82" font-family="sans-serif" font-size="12" fill="#31332e">Après</text>
-  <!-- Grid lines -->
-  <line x1="180" y1="100" x2="180" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="280" y1="100" x2="280" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="380" y1="100" x2="380" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="480" y1="100" x2="480" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="580" y1="100" x2="580" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <line x1="680" y1="100" x2="680" y2="330" stroke="#e5e7eb" stroke-width="1"/>
-  <!-- Axis labels -->
-  <text x="180" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">0%</text>
-  <text x="280" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">20%</text>
-  <text x="380" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">40%</text>
-  <text x="480" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">60%</text>
-  <text x="580" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">80%</text>
-  <text x="680" y="348" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#31332e" opacity="0.5">100%</text>
-  <!-- Burnout: 61% -> 4% -->
-  <text x="170" y="127" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Burnout</text>
-  <rect x="180" y="110" width="305" height="24" rx="4" fill="#d97706"/>
-  <text x="492" y="127" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">61%</text>
-  <rect x="180" y="138" width="20" height="24" rx="4" fill="#46673e"/>
-  <text x="207" y="155" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">4%</text>
-  <!-- Satisfaction au travail: 71% -> 96% -->
-  <text x="170" y="202" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Satisfaction au travail</text>
-  <rect x="180" y="185" width="355" height="24" rx="4" fill="#d97706"/>
-  <text x="542" y="202" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">71%</text>
-  <rect x="180" y="213" width="480" height="24" rx="4" fill="#46673e"/>
-  <text x="665" y="230" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">96%</text>
-  <!-- Joie au travail: 34% -> 86% -->
-  <text x="170" y="277" text-anchor="end" font-family="sans-serif" font-size="13" font-weight="bold" fill="#31332e">Joie au travail</text>
-  <rect x="180" y="260" width="170" height="24" rx="4" fill="#d97706"/>
-  <text x="357" y="277" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d97706">34%</text>
-  <rect x="180" y="288" width="430" height="24" rx="4" fill="#46673e"/>
-  <text x="617" y="305" font-family="sans-serif" font-size="12" font-weight="bold" fill="#46673e">86%</text>
-</svg>
-
+<div style="margin: 2em 0; max-width: 100%;">
+<canvas id="chart-burnout-transformation"></canvas>
 </div>
+<script>
+new Chart(document.getElementById('chart-burnout-transformation'), {
+  type: 'bar',
+  data: {
+    labels: ['Burnout', 'Satisfaction au travail', 'Joie au travail'],
+    datasets: [
+      { label: 'Avant', data: [61, 71, 34], backgroundColor: '#d97706', borderRadius: 4, barThickness: 20 },
+      { label: 'Après', data: [4, 96, 86], backgroundColor: '#46673e', borderRadius: 4, barThickness: 20 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Transformation du burnout dans la santé', font: { size: 16, weight: 'bold' }, color: '#31332e', padding: { bottom: 4 } },
+      subtitle: { display: true, text: '38 dirigeants de santé, USA (PubMed, 2024)', color: '#6b7280', font: { size: 12 }, padding: { bottom: 16 } },
+      legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'rectRounded', color: '#31332e' } },
+      tooltip: { callbacks: { label: (ctx) => ctx.dataset.label + ': ' + ctx.raw + '%' } }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + '%', color: '#6b7280' }, grid: { color: '#e5e7eb' } },
+      y: { ticks: { color: '#31332e', font: { size: 13, weight: 'bold' } }, grid: { display: false } }
+    }
+  }
+});
+</script>
 
 ### Burnout à travers les essais internationaux
 

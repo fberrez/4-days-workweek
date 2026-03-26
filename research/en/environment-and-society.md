@@ -36,18 +36,48 @@ The landmark report **"Stop the Clock: The Environmental Benefits of a Shorter W
 
 *Source: [Platform London / 4 Day Week Campaign, "Stop the Clock", 2021](https://www.4dayweek.co.uk/projects/stop-the-clock:-the-environmental-benefits-of-a-shorter-working-week)*
 
-<div style="margin: 2rem 0;">
-<svg viewBox="0 0 680 260" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family: sans-serif;">
-  <rect x="0" y="0" width="680" height="260" rx="8" fill="#f5f4ed"/>
-  <text x="340" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#31332e">UK Carbon Reduction Potential</text>
-  <text x="340" y="120" text-anchor="middle" font-size="56" font-weight="bold" fill="#9a462a">127M tonnes</text>
-  <text x="340" y="160" text-anchor="middle" font-size="18" fill="#31332e">CO&#x2082; per year could be saved</text>
-  <line x1="200" y1="185" x2="480" y2="185" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="340" y="215" text-anchor="middle" font-size="16" fill="#46673e">= removing 27 million cars from the road</text>
-  <circle cx="190" cy="211" r="6" fill="#46673e" opacity="0.5"/>
-  <circle cx="480" cy="211" r="6" fill="#46673e" opacity="0.5"/>
-</svg>
+<div style="margin: 2em 0; max-width: 400px;">
+<canvas id="chart-co2-reduction"></canvas>
 </div>
+<script>
+new Chart(document.getElementById('chart-co2-reduction'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Could be saved (21.3%)', 'Remaining footprint'],
+    datasets: [{
+      data: [21.3, 78.7],
+      backgroundColor: ['#9a462a', '#e5e7eb'],
+      borderWidth: 0,
+      cutout: '70%',
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'UK Carbon Reduction Potential', font: { size: 16, weight: 'bold' }, color: '#31332e', padding: { bottom: 4 } },
+      subtitle: { display: true, text: 'Equivalent to removing 27 million cars (Platform London)', color: '#6b7280', font: { size: 12 }, padding: { bottom: 12 } },
+      legend: { display: false },
+      tooltip: { callbacks: { label: (ctx) => ctx.label + ': ' + ctx.raw + '%' } }
+    }
+  },
+  plugins: [{
+    id: 'centerText',
+    afterDraw(chart) {
+      const { ctx, width, height } = chart;
+      ctx.save();
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillStyle = '#9a462a';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('127M t', width / 2, height / 2 - 10);
+      ctx.font = '13px sans-serif';
+      ctx.fillStyle = '#6b7280';
+      ctx.fillText('CO₂ / year', width / 2, height / 2 + 16);
+      ctx.restore();
+    }
+  }]
+});
+</script>
 
 ### Autonomy Institute: "Sparking Change" Report (2020)
 
@@ -427,48 +457,43 @@ Key characteristics of pre-industrial work:
 
 *Sources: [Firmspace, "From Strikes to Labor Laws", 2024](https://firmspace.com/theproworker/from-strikes-to-labor-laws-how-the-us-adopted-the-5-day-workweek); [Teaching American History, "Henry Ford's Five-Day Week"](https://teachingamericanhistory.org/document/henry-fords-five-day-week/)*
 
-<div style="margin: 2rem 0;">
-<svg viewBox="0 0 800 300" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family: sans-serif;">
-  <rect x="0" y="0" width="800" height="300" rx="8" fill="#f5f4ed"/>
-  <text x="400" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#31332e">Working Hours: Historical Timeline</text>
-  <!-- Grid line -->
-  <line x1="60" y1="200" x2="740" y2="200" stroke="#e5e7eb" stroke-width="2"/>
-  <!-- Trend line connecting dots -->
-  <polyline points="100,100 270,130 440,140 580,160 710,150" fill="none" stroke="#9a462a" stroke-width="2.5" stroke-dasharray="8,4"/>
-  <!-- 1870 -->
-  <circle cx="100" cy="100" r="7" fill="#9a462a"/>
-  <line x1="100" y1="107" x2="100" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="100" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#31332e">1870</text>
-  <text x="100" y="82" text-anchor="middle" font-size="13" font-weight="bold" fill="#9a462a">~3,000 hrs/yr</text>
-  <!-- 1926 -->
-  <circle cx="270" cy="130" r="7" fill="#46673e"/>
-  <line x1="270" y1="137" x2="270" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="270" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#31332e">1926</text>
-  <text x="270" y="112" text-anchor="middle" font-size="12" fill="#46673e">Ford adopts</text>
-  <text x="270" y="126" text-anchor="middle" font-size="12" fill="#46673e">5-day week</text>
-  <!-- 1940 -->
-  <circle cx="440" cy="140" r="7" fill="#46673e"/>
-  <line x1="440" y1="147" x2="440" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="440" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#31332e">1940</text>
-  <text x="440" y="122" text-anchor="middle" font-size="12" fill="#46673e">FLSA 40-hour</text>
-  <text x="440" y="136" text-anchor="middle" font-size="12" fill="#46673e">standard</text>
-  <!-- Today -->
-  <circle cx="580" cy="160" r="7" fill="#9a462a"/>
-  <line x1="580" y1="167" x2="580" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="580" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#31332e">Today</text>
-  <text x="580" y="145" text-anchor="middle" font-size="13" font-weight="bold" fill="#9a462a">~1,750 hrs/yr</text>
-  <!-- Next -->
-  <circle cx="710" cy="150" r="7" fill="#46673e" stroke="#46673e" stroke-width="2" fill-opacity="0.3"/>
-  <line x1="710" y1="157" x2="710" y2="200" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
-  <text x="710" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#31332e">Next</text>
-  <text x="710" y="132" text-anchor="middle" font-size="12" fill="#46673e">4-day</text>
-  <text x="710" y="146" text-anchor="middle" font-size="12" fill="#46673e">week?</text>
-  <!-- Arrow at end -->
-  <polygon points="745,200 755,196 755,204" fill="#e5e7eb"/>
-  <!-- Subtitle -->
-  <text x="400" y="268" text-anchor="middle" font-size="13" fill="#31332e" opacity="0.7">A 200-year decline in annual working hours</text>
-</svg>
+<div style="margin: 2em 0; max-width: 100%;">
+<canvas id="chart-working-hours-timeline"></canvas>
 </div>
+<script>
+new Chart(document.getElementById('chart-working-hours-timeline'), {
+  type: 'line',
+  data: {
+    labels: ['1870', '1926', '1940', '1980', 'Today', '4-day week?'],
+    datasets: [{
+      label: 'Hours per year',
+      data: [3000, 2400, 2100, 1900, 1750, 1400],
+      borderColor: '#9a462a',
+      backgroundColor: 'rgba(154, 70, 42, 0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 6,
+      pointBackgroundColor: '#9a462a',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: '200 Years of Declining Working Hours', font: { size: 16, weight: 'bold' }, color: '#31332e', padding: { bottom: 4 } },
+      subtitle: { display: true, text: 'Annual hours per worker (OECD, historical data)', color: '#6b7280', font: { size: 12 }, padding: { bottom: 16 } },
+      legend: { display: false },
+      tooltip: { callbacks: { label: (ctx) => ctx.raw + ' hrs/year' } }
+    },
+    scales: {
+      y: { beginAtZero: false, min: 1000, max: 3200, ticks: { callback: (v) => v.toLocaleString() + ' h', color: '#6b7280' }, grid: { color: '#e5e7eb' } },
+      x: { ticks: { color: '#31332e', font: { weight: 'bold' } }, grid: { color: '#e5e7eb' } }
+    }
+  }
+});
+</script>
 
 #### The Long Arc: Working Hours Over Two Centuries
 
