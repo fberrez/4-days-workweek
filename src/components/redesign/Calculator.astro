@@ -1,0 +1,209 @@
+---
+const initialSize = 100;
+const initialSalary = 85000;
+const turnover = Math.round(initialSize * 0.57 * 0.15 * initialSalary);
+const sick = Math.round(initialSize * (8.4 - 2.9) * (initialSalary / 250));
+const energy = Math.round(initialSize * 220);
+const total = turnover + sick + energy;
+---
+
+<section id="calculator" class="fdw-calc">
+  <div class="fdw-eyebrow accent">The Calculator</div>
+  <h2 class="fdw-headline is-roman">What would your company save?</h2>
+
+  <div class="calc-grid">
+    <div class="calc-controls">
+      <div class="calc-control">
+        <div class="row">
+          <label class="cmp-mono" for="fdw-headcount">Headcount</label>
+          <div class="val" data-headcount-val>{initialSize}</div>
+        </div>
+        <input
+          id="fdw-headcount"
+          type="range"
+          min="10"
+          max="2000"
+          step="10"
+          value={initialSize}
+          class="fdw-range-light"
+        />
+      </div>
+      <div class="calc-control">
+        <div class="row">
+          <label class="cmp-mono" for="fdw-salary">Avg. salary</label>
+          <div class="val" data-salary-val>${initialSalary.toLocaleString()}</div>
+        </div>
+        <input
+          id="fdw-salary"
+          type="range"
+          min="40000"
+          max="200000"
+          step="1000"
+          value={initialSalary}
+          class="fdw-range-light"
+        />
+      </div>
+      <p class="calc-fineprint">
+        Estimates based on UK Pilot turnover/absenteeism deltas, Microsoft Japan
+        energy savings, and replacement cost ≈ 50% of annual salary. Indicative
+        only.
+      </p>
+    </div>
+
+    <div class="calc-result">
+      <div class="cmp-mono">Estimated annual savings</div>
+      <div class="big">
+        $<span data-total>{Math.round(total / 1000)}</span><span class="k">k</span>
+      </div>
+      <div class="lines">
+        <div class="line">
+          <span>Reduced turnover</span>
+          <span class="num">$<span data-turnover>{turnover.toLocaleString()}</span></span>
+        </div>
+        <div class="line">
+          <span>Fewer sick days</span>
+          <span class="num">$<span data-sick>{sick.toLocaleString()}</span></span>
+        </div>
+        <div class="line">
+          <span>Lower energy &amp; overhead</span>
+          <span class="num">$<span data-energy>{energy.toLocaleString()}</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fdw-calc {
+    padding: 120px 48px;
+    background: var(--paper-warm);
+  }
+  .fdw-calc .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .fdw-calc .fdw-headline {
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.96;
+    margin-top: 16px;
+    max-width: 1100px;
+  }
+
+  .calc-grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .calc-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .calc-control .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .calc-control .cmp-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .calc-control .val {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .calc-fineprint {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-4);
+    margin-top: 8px;
+  }
+
+  .calc-result {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 20px;
+    padding: 40px;
+  }
+  .calc-result .cmp-mono {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+  }
+  .calc-result .big {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(72px, 9vw, 130px);
+    line-height: 0.92;
+    margin-top: 12px;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .calc-result .big .k { font-weight: 300; color: var(--paper); }
+  .calc-result .lines {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .calc-result .line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: var(--font-display);
+    font-size: 16px;
+  }
+  .calc-result .line .num {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 900px) {
+    .fdw-calc { padding: 72px 24px; }
+    .calc-grid { grid-template-columns: 1fr; gap: 32px; }
+    .calc-result { padding: 28px; }
+  }
+</style>
+
+<script>
+  const headcount = document.getElementById("fdw-headcount") as HTMLInputElement | null;
+  const salary = document.getElementById("fdw-salary") as HTMLInputElement | null;
+  const headcountVal = document.querySelector<HTMLDivElement>("[data-headcount-val]");
+  const salaryVal = document.querySelector<HTMLDivElement>("[data-salary-val]");
+  const elTotal = document.querySelector<HTMLSpanElement>("[data-total]");
+  const elTurnover = document.querySelector<HTMLSpanElement>("[data-turnover]");
+  const elSick = document.querySelector<HTMLSpanElement>("[data-sick]");
+  const elEnergy = document.querySelector<HTMLSpanElement>("[data-energy]");
+
+  function recompute() {
+    if (!headcount || !salary) return;
+    const size = parseInt(headcount.value, 10);
+    const sal = parseInt(salary.value, 10);
+    const t = Math.round(size * 0.57 * 0.15 * sal);
+    const s = Math.round(size * (8.4 - 2.9) * (sal / 250));
+    const e = Math.round(size * 220);
+    const total = t + s + e;
+    if (headcountVal) headcountVal.textContent = String(size);
+    if (salaryVal) salaryVal.textContent = `$${sal.toLocaleString()}`;
+    if (elTotal) elTotal.textContent = String(Math.round(total / 1000));
+    if (elTurnover) elTurnover.textContent = t.toLocaleString();
+    if (elSick) elSick.textContent = s.toLocaleString();
+    if (elEnergy) elEnergy.textContent = e.toLocaleString();
+  }
+
+  headcount?.addEventListener("input", recompute);
+  salary?.addEventListener("input", recompute);
+</script>

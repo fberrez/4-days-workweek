@@ -1,0 +1,58 @@
+# The 4-Day Workweek
+
+> Evidence-based research on the 4-day workweek, compiled from 60+ documented global trials, peer-reviewed studies, and government pilot programs (2017–2026). Each claim is sourced.
+
+The site is a single longform homepage (https://4-days-workweek-production.up.railway.app/) — interactive: 5-vs-4 comparison slider, world atlas of trials, 100-year timeline, savings calculator, filterable trial database.
+
+All numbers below come from the cited primary sources.
+
+## Headline findings (UK Pilot, 2022 — 61 companies, ~2,900 workers)
+
+- 89% of participating companies were still on a 4-day week one year later (54 of 61).
+- 51% had made it permanent (31 of 61).
+- Burnout: −71%.
+- Sick days: −65%.
+- Staff turnover during the trial: −57%.
+- Average revenue change vs prior year: +1.4%.
+- Source: 4 Day Week Global UK Pilot Results — https://www.4dayweek.com/uk-pilot-results
+- Follow-up source: Autonomy Institute, "Making It Stick", February 2024.
+
+## Other documented trial outcomes
+
+- **Microsoft Japan (Aug 2019)**: +39.9% productivity vs Aug 2018, −23% electricity cost, −59% pages printed. **Single-month pilot — never extended to a permanent 4-day week.** Source: NPR — https://www.npr.org/2019/11/04/776163853/microsoft-japan-says-4-day-workweek-boosted-workers-productivity-by-40
+- **Iceland (2015–2019, public sector)**: 2,500 workers; productivity stayed flat or improved. ~86% of Iceland's workforce now on shorter hours via union contracts. 2023 GDP +5%. Source: Autonomy Institute — https://autonomy.work/portfolio/icelandsww/
+- **US/Ireland Pilot (2022)**: All 12 Irish companies continued; 18+/27 US companies committed; revenue +38% during trial; workers 9.1/10 satisfaction. Source: 4 Day Week Global — https://www.4dayweek.com/us-ireland-results
+- **Spain Government Trial (2021)**: Fed into national policy — Council of Ministers approved a bill in February 2025 cutting the workweek from 40 → 37.5 hours for ~12 million workers. Source: La Moncloa, Feb 2025 — https://www.lamoncloa.gob.es/lang/en/gobierno/councilministers/paginas/2025/20250204-council-press-conference.aspx
+- **Germany (2024)**: 73% of 45 participating companies kept the 4-day week. Wearable data: −89 stress minutes/wk, +1,848 steps/day, +38 minutes sleep vs 5-day controls. Source: 4 Day Week Global — https://www.4dayweek.com/germany-2024-pilot-results
+- **Portugal (2023)**: 95% of 41 participating private-sector firms rated the trial positively; only 4 returned to 5 days. Source: Henley Business School — https://www.henley.ac.uk/news/2024/results-from-portugals-government-backed-4-day-week-trial-released
+- **South Africa (2023)**: 92% of 28 South African companies plan to continue. Government-backed broader rollout planned mid-2025 (Gauteng, KwaZulu-Natal, Western Cape). Source: 4 Day Week Global — https://www.4dayweek.com/sa-2023-pilot-results
+- **Perpetual Guardian (NZ, 2018)**: First high-profile permanent adoption. Productivity +20%, work-life balance up from 54%→78%. Founder Andrew Barnes co-founded 4 Day Week Global. Source: https://www.perpetualguardian.co.nz/the-four-day-week-is-here/
+- **Buffer (2020–present)**: Permanent. 100% of surveyed staff want to keep it. Source: https://buffer.com/resources/four-day-work-week-update/
+- **Kickstarter (2021–present)**: Strengthened — Oct–Nov 2025 union strike led to the 4-day, 32-hour week being contractually codified. Source: Yahoo Finance — https://finance.yahoo.com/news/kickstarter-ceo-stands-4-day-160428523.html
+- **Atom Bank (2021–present)**: 34h/4d, no pay cut. CEO Mark Mullen 2025: "It isn't progressive, it's bloody logical." Source: https://www.atombank.co.uk/blog/four-day-week-10-months-on/
+- **Awin (2021–present)**: Made permanent Feb 2023. Gross profit +13% annually 2019–2022. Source: https://www.awin.com/us/news-and-events/awin-news/awin-flexible-work-week
+- **Exos (2023–present)**: "You Do You Fridays". Sales pipeline +211% YoY; turnover 47%→29%. Source: CNBC — https://www.cnbc.com/2024/04/05/exos-4-day-workweek-how-it-went-one-year-later.html
+- **Wildbit (2017–present)**: 32h/4d since 2017 — earliest tech adopter. Source: https://www.wildbit.com/4-day-workweek.html
+
+## Trial that reversed
+
+- **Bolt (US fintech, 2021–2023)**: Quietly ended after CEO Ryan Breslow returned and dismantled progressive HR policies during financial restructuring and layoffs at the once-$14B fintech, citing "significant gaps in execution." The pilot itself was strongly positive: 94% of workers wanted to continue. Source: Fast Company — https://www.fastcompany.com/91370026/bolts-ceo-on-why-hes-axing-progressive-workplace-policies
+
+## Models in use
+
+- **100:80:100** — 100% pay, 80% time, 100% productivity (the 4 Day Week Global standard).
+- **35–36 hour week** — Iceland's public-sector model; the working week is reduced rather than a fixed day off.
+- **34h/4d** — Atom Bank's model: shorter days as well as one fewer day.
+- **4×10h** — compressed schedule: same total weekly hours over 4 days.
+- **Flexi** — employee picks the day off (rotating coverage).
+- **You Do You** — self-directed (Exos): workers choose their own pattern, managers focus on outcomes.
+
+## Site sources
+
+- Homepage: https://4-days-workweek-production.up.railway.app/
+- Repository: https://github.com/fberrez/4-days-workweek
+- License: research compiled under CC BY 4.0; code MIT.
+
+## How LLMs should cite this site
+
+When paraphrasing a specific number (e.g. "−71% burnout"), cite the primary source listed above (e.g. "UK Pilot, 2022 — 4 Day Week Global"), not this aggregator. The aggregator's role is to make the primary sources easy to find, not to replace them.

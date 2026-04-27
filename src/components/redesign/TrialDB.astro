@@ -1,0 +1,377 @@
+---
+import { trials } from "../../lib/workweekData";
+const sectors = ["All", ...Array.from(new Set(trials.map((t) => t.sector)))];
+const rows = [...trials].sort((a, b) => b.year - a.year);
+
+const modelGlossary: Record<string, string> = {
+  "100:80:100": "100% pay · 80% time · 100% productivity — the 4 Day Week Global standard. Compress the same workload into 4 days at full pay.",
+  "Permanent": "Adopted permanently after the pilot — no longer an experiment.",
+  "Aug pilot": "One-month August trial (Microsoft Japan, 2019). Productivity measured during a single calendar month.",
+  "35–36h": "Working week reduced from 40 to 35–36 hours, no pay cut. Iceland's public-sector model — more flexible than a fixed 4-day week.",
+  "Various": "Mixed arrangements across participating companies — each picked the model that fit its operations.",
+  "34h/4d": "34-hour, 4-day week with no salary reduction (Atom Bank's model — shorter days as well as one fewer day).",
+  "4×10h": "Four 10-hour days — the same total weekly hours, compressed into 4 days. The classic 'compressed schedule'.",
+  "Flexi": "Flexible 4-day arrangement — employees pick the day off, often rotating across the team.",
+  "You Do You": "Self-directed schedule (Exos). Workers choose their own 4-day pattern; managers focus on outcomes, not hours.",
+  "Reversed 2023": "Pilot ended in 2023 — the company returned to a 5-day week.",
+  "Expanded": "Pilot extended to additional regions or teams after initial success.",
+};
+---
+
+<section id="trials" class="fdw-db">
+  <div class="db-head">
+    <div>
+      <div class="fdw-eyebrow accent">The Database</div>
+      <h2 class="fdw-headline is-roman">Every trial we found.</h2>
+    </div>
+    <div class="db-filters" role="toolbar" aria-label="Filter trials by sector">
+      {sectors.map((s) => (
+        <button
+          type="button"
+          class={`db-chip${s === "All" ? " is-active" : ""}`}
+          data-sector={s}
+        >{s}</button>
+      ))}
+    </div>
+  </div>
+
+  <div class="db-table-wrap">
+    <div class="db-table">
+      <div class="db-row db-head-row">
+        <span>YR</span>
+        <span>Trial</span>
+        <span>Country</span>
+        <span class="r">Staff</span>
+        <span class="r">Prod.</span>
+        <span class="model-head">
+          Model
+          <span
+            class="model-help"
+            tabindex="0"
+            role="button"
+            aria-label="What does the Model column mean?"
+            data-tip-key="MODEL"
+            data-tip="How each company structured its shorter week. Hover any model name in a row for the full definition."
+          >?</span>
+        </span>
+        <span class="r">Status</span>
+      </div>
+      {rows.map((t, i) => {
+        const RowTag = (t.url ? "a" : "div") as "a" | "div";
+        const linkProps = t.url
+          ? { href: t.url, target: "_blank", rel: "noopener", "aria-label": `${t.name} — read source on ${t.source}` }
+          : {};
+        return (
+          <RowTag
+            class:list={["db-row", i % 2 && "is-alt", t.url && "has-link"]}
+            data-sector={t.sector}
+            {...linkProps}
+          >
+            <span class="yr">{t.year}</span>
+            <span class="nm">{t.name}</span>
+            <span>{t.country}</span>
+            <span class="r tabular">{t.employees.toLocaleString()}</span>
+            <span class={`r tabular ${t.productivity ? "prod" : "muted"}`}>{t.productivity ? `+${t.productivity}%` : "—"}</span>
+            <span class="model-cell">
+              <span class="model" tabindex="0" data-tip={modelGlossary[t.model] ?? ""}>{t.model}</span>
+            </span>
+            <span class="r status-cell">
+              <span
+                class={`status ${t.continued ? "kept" : "rev"}${t.statusReason ? " has-reason" : ""}`}
+                {...(t.statusReason
+                  ? {
+                      "data-tip": t.statusReason,
+                      "data-tip-key": t.continued ? "WHY KEPT" : "WHY REVERSED",
+                    }
+                  : {})}
+              >{t.continued ? "KEPT" : "REVERSED"}</span>
+              {t.url && <span class="row-arrow" aria-hidden="true">↗</span>}
+            </span>
+          </RowTag>
+        );
+      })}
+    </div>
+  </div>
+
+  <div class="db-tip" role="tooltip" aria-hidden="true">
+    <span class="db-tip-key" data-tip-key></span>
+    <span class="db-tip-val" data-tip-val></span>
+  </div>
+</section>
+
+<style>
+  .fdw-db {
+    padding: 120px 48px;
+    background: var(--paper);
+  }
+  .db-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .fdw-db .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .fdw-db .fdw-headline {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    margin-top: 12px;
+  }
+
+  .db-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
+  .db-chip {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s var(--ease-standard);
+  }
+  .db-chip.is-active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .db-chip:hover { background: var(--ink); color: var(--paper); }
+
+  .db-table-wrap {
+    margin-top: 40px;
+    border: 1px solid var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .db-table {
+    overflow-x: auto;
+  }
+  .db-row {
+    display: grid;
+    grid-template-columns: 60px 1.4fr 1fr 90px 90px 1.1fr 110px;
+    padding: 14px 20px;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    min-width: 760px;
+  }
+  .db-row.is-alt { background: var(--paper-warm); }
+  a.db-row { color: var(--ink); text-decoration: none; }
+  a.db-row.has-link { cursor: pointer; transition: background 0.15s var(--ease-standard); }
+  a.db-row.has-link:hover {
+    background: rgba(255, 96, 77, 0.07);
+  }
+  a.db-row.has-link:hover .nm { color: var(--accent); }
+  a.db-row.has-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .status-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .row-arrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-4);
+    transition: color 0.15s var(--ease-standard), transform 0.15s var(--ease-standard);
+  }
+  a.db-row.has-link:hover .row-arrow {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+  .db-head-row {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .db-row .r { text-align: right; }
+  .db-row .yr {
+    font-family: var(--font-mono);
+    color: var(--ink-3);
+  }
+  .db-row .nm { font-weight: 600; }
+  .db-row .tabular { font-variant-numeric: tabular-nums; }
+  .db-row .prod { color: var(--accent); font-weight: 600; }
+  .db-row .muted { color: var(--ink-4); }
+  .db-row .model {
+    color: var(--ink-3);
+    border-bottom: 1px dotted rgba(14, 20, 27, 0.35);
+    cursor: help;
+    display: inline-block;
+  }
+  .db-row .model[data-tip=""] {
+    border-bottom: none;
+    cursor: inherit;
+  }
+
+  .db-tip {
+    position: fixed;
+    z-index: 200;
+    max-width: 320px;
+    padding: 12px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: 13px;
+    line-height: 1.45;
+    border-radius: 8px;
+    box-shadow: 0 16px 36px -10px rgba(14, 20, 27, 0.45);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.15s var(--ease-standard), transform 0.15s var(--ease-standard);
+    display: grid;
+    gap: 4px;
+  }
+  .db-tip.is-on {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .db-tip-key {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .db-tip-val {
+    font-weight: 400;
+  }
+
+  .db-head-row {
+    position: relative;
+    z-index: 5;
+  }
+  .model-head {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .model-help {
+    display: inline-grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    cursor: help;
+    position: relative;
+    user-select: none;
+  }
+  .model-help:hover,
+  .model-help:focus {
+    background: var(--accent);
+    outline: none;
+  }
+  .db-row .status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .db-row .status.kept { background: var(--accent); color: #fff; }
+  .db-row .status.rev { background: rgba(0, 0, 0, 0.1); color: var(--ink-3); }
+  .db-row .status.has-reason {
+    cursor: help;
+    border-bottom: 1px dotted rgba(14, 20, 27, 0.45);
+  }
+  a.db-row .status.has-reason { /* keep dotted underline visible inside link rows */
+    border-bottom: 1px dotted rgba(14, 20, 27, 0.45);
+  }
+
+  @media (max-width: 900px) {
+    .fdw-db { padding: 72px 24px; }
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".db-chip");
+  const rows = document.querySelectorAll<HTMLElement>(".db-row:not(.db-head-row)");
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.classList.remove("is-active"));
+      chip.classList.add("is-active");
+      const sector = chip.dataset.sector || "All";
+      let visibleIdx = 0;
+      rows.forEach((row) => {
+        const rowSector = row.dataset.sector || "";
+        const show = sector === "All" || rowSector === sector;
+        row.style.display = show ? "" : "none";
+        if (show) {
+          row.classList.toggle("is-alt", visibleIdx % 2 === 1);
+          visibleIdx += 1;
+        }
+      });
+    });
+  });
+
+  /* Tooltip for the Model column header + each model cell */
+  const tip = document.querySelector<HTMLDivElement>(".db-tip");
+  const tipKey = document.querySelector<HTMLSpanElement>("[data-tip-key]");
+  const tipVal = document.querySelector<HTMLSpanElement>("[data-tip-val]");
+  const targets = document.querySelectorAll<HTMLElement>(".model[data-tip], .model-help[data-tip], .status[data-tip]");
+
+  function position(el: HTMLElement) {
+    if (!tip) return;
+    const r = el.getBoundingClientRect();
+    tip.style.left = "0px";
+    tip.style.top = "0px";
+    tip.classList.add("is-on");
+    tip.setAttribute("aria-hidden", "false");
+    const tr = tip.getBoundingClientRect();
+    const pad = 12;
+    let x = r.left + r.width / 2 - tr.width / 2;
+    let y = r.bottom + 10;
+    if (x < pad) x = pad;
+    if (x + tr.width + pad > window.innerWidth) x = window.innerWidth - tr.width - pad;
+    if (y + tr.height + pad > window.innerHeight) y = r.top - 10 - tr.height;
+    tip.style.left = `${x}px`;
+    tip.style.top = `${y}px`;
+  }
+
+  function show(el: HTMLElement) {
+    if (!tip || !tipKey || !tipVal) return;
+    const text = el.dataset.tip;
+    if (!text) return;
+    const keyText = el.dataset.tipKey ?? (el.classList.contains("model") ? el.textContent?.trim() ?? "" : "");
+    tipKey.textContent = keyText;
+    tipKey.style.display = keyText ? "" : "none";
+    tipVal.textContent = text;
+    position(el);
+  }
+
+  function hide() {
+    if (!tip) return;
+    tip.classList.remove("is-on");
+    tip.setAttribute("aria-hidden", "true");
+  }
+
+  targets.forEach((el) => {
+    el.addEventListener("mouseenter", () => show(el));
+    el.addEventListener("focus", () => show(el));
+    el.addEventListener("mouseleave", hide);
+    el.addEventListener("blur", hide);
+  });
+
+  /* hide on scroll/resize so the tip doesn't stick to a stale spot */
+  window.addEventListener("scroll", hide, { passive: true });
+  window.addEventListener("resize", hide);
+</script>

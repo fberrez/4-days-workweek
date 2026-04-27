@@ -1,0 +1,76 @@
+---
+---
+
+<footer class="fdw-footer">
+  <h2 class="fdw-headline is-roman cta-heading">
+    Add your trial<br /><span class="accent">to the atlas.</span>
+  </h2>
+  <div class="cta-buttons">
+    <a class="fdw-btn is-accent" href="https://github.com/fberrez/4-days-workweek/issues/new" target="_blank" rel="noopener">Submit a pilot →</a>
+    <a class="fdw-btn is-ghost is-on-dark" href="https://github.com/fberrez/4-days-workweek" target="_blank" rel="noopener">Read the methodology</a>
+  </div>
+
+  <div class="footer-bar">
+    <div class="fdw-logo on-dark">
+      <span class="mark">4</span>
+      <span class="logo-text">fourday<span class="dot">.</span>work</span>
+    </div>
+    <div class="meta">Open source · CC BY 4.0 · Last updated March 2026</div>
+  </div>
+</footer>
+
+<style>
+  .fdw-footer {
+    padding: 96px 48px 64px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .cta-heading {
+    font-size: clamp(48px, 6.5vw, 88px);
+    line-height: 0.96;
+    color: var(--paper);
+    max-width: 1100px;
+  }
+  .cta-heading .accent { color: var(--accent); }
+  .cta-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .fdw-btn.is-on-dark {
+    color: var(--paper);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .fdw-btn.is-ghost.is-on-dark:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+
+  .footer-bar {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .fdw-logo.on-dark {
+    color: var(--paper);
+  }
+  .fdw-logo.on-dark .mark { background: var(--accent); color: #fff; }
+  .fdw-logo .logo-text { font-style: normal; }
+  .fdw-logo .dot { color: var(--accent); }
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .fdw-footer { padding: 72px 24px 48px; }
+  }
+</style>

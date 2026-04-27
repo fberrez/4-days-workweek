@@ -1,0 +1,248 @@
+---
+const metrics = [
+  { key: "meetings", label: "meetings per week", five: 18, four: 7, fmt: "round", suffix: "", direction: "down" },
+  { key: "deepWork", label: "hours of deep work", five: 12, four: 19, fmt: "round", suffix: "", direction: "up" },
+  { key: "sickDays", label: "sick days per year", five: 8.4, four: 2.9, fmt: "fixed1", suffix: "", direction: "down" },
+  { key: "burnout", label: "% reporting burnout", five: 70, four: 36, fmt: "round", suffix: "%", direction: "down" },
+  { key: "satisfaction", label: "% satisfied with work-life", five: 54, four: 78, fmt: "round", suffix: "%", direction: "up" },
+  { key: "co2", label: "CO₂ commute index", five: 100, four: 73, fmt: "round", suffix: "", direction: "down" },
+];
+---
+
+<section id="compare" class="fdw-cmp">
+  <div class="fdw-eyebrow accent">The Comparison</div>
+  <h2 class="fdw-headline is-roman">
+    Drag the slider. <span class="accent">Watch the numbers move.</span>
+  </h2>
+  <p class="fdw-cmp-lede">
+    Each metric below interpolates between the five-day baseline and the
+    average four-day result reported across the UK, US/Ireland, South Africa,
+    and Germany pilots.
+  </p>
+
+  <div class="fdw-cmp-grid">
+    <div class="fdw-cmp-control">
+      <div class="cmp-mono">Workweek</div>
+      <div class="cmp-numbers">
+        <div class="num five active" data-five>5</div>
+        <div class="num four" data-four>4</div>
+      </div>
+      <div class="cmp-mono row">
+        <span>DAY</span><span>DAY</span>
+      </div>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.001"
+        value="0"
+        class="fdw-range"
+        id="fdw-cmp-slider"
+        aria-label="Workweek slider — drag to blend between 5-day and 4-day"
+      />
+      <div class="cmp-blend">
+        <div class="cmp-mono accent">Blend</div>
+        <div class="cmp-blend-text" data-blend>A traditional five-day week.</div>
+      </div>
+    </div>
+
+    <div class="fdw-cmp-cards">
+      {metrics.map((m) => (
+        <div
+          class="cmp-card"
+          data-key={m.key}
+          data-five={m.five}
+          data-four={m.four}
+          data-fmt={m.fmt}
+          data-suffix={m.suffix}
+          data-direction={m.direction}
+        >
+          <div class="cmp-mono lbl">{m.label}</div>
+          <div class="cmp-val" data-val>{m.fmt === "fixed1" ? m.five.toFixed(1) : Math.round(m.five)}{m.suffix}</div>
+          <div class="cmp-bar"><div class="cmp-bar-fill" data-bar></div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fdw-cmp {
+    padding: 120px 48px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .fdw-cmp .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .fdw-cmp .fdw-headline {
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.96;
+    margin-top: 16px;
+    color: var(--paper);
+    max-width: 1100px;
+  }
+  .fdw-cmp .fdw-headline .accent { color: var(--accent); }
+  .fdw-cmp-lede {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: var(--font-editorial);
+    font-size: 19px;
+    max-width: 720px;
+  }
+
+  .fdw-cmp-grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 64px;
+  }
+  .cmp-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+  }
+  .cmp-mono.accent { color: var(--accent); font-size: 10px; letter-spacing: 0.1em; }
+  .cmp-mono.row { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.1em; margin-top: 4px; }
+
+  .cmp-numbers {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 6px;
+  }
+  .cmp-numbers .num {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.2s var(--ease-standard);
+  }
+  .cmp-numbers .num.active { color: var(--paper); }
+  .cmp-numbers .num.four.active { color: var(--accent); }
+
+  .fdw-range { margin-top: 28px; }
+
+  .cmp-blend {
+    margin-top: 32px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .cmp-blend-text {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-top: 8px;
+    color: var(--paper);
+  }
+
+  .fdw-cmp-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .cmp-card {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .cmp-card .lbl {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .cmp-val {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-top: 8px;
+    color: var(--paper);
+    transition: color 0.2s var(--ease-standard);
+  }
+  .cmp-card.is-better .cmp-val { color: var(--accent); }
+  .cmp-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    margin-top: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cmp-bar-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--paper);
+    width: 0%;
+    transition: width 0.3s var(--ease-standard), background 0.2s var(--ease-standard);
+  }
+  .cmp-card.is-better .cmp-bar-fill { background: var(--accent); }
+
+  @media (max-width: 900px) {
+    .fdw-cmp { padding: 72px 24px; }
+    .fdw-cmp-grid { grid-template-columns: 1fr; gap: 32px; }
+    .fdw-cmp-cards { grid-template-columns: 1fr; }
+    .cmp-numbers .num { font-size: 60px; }
+    .cmp-val { font-size: 44px; }
+  }
+</style>
+
+<script>
+  const slider = document.getElementById("fdw-cmp-slider") as HTMLInputElement | null;
+  const cards = document.querySelectorAll<HTMLDivElement>(".cmp-card");
+  const blendText = document.querySelector<HTMLDivElement>("[data-blend]");
+  const fiveNum = document.querySelector<HTMLDivElement>(".num.five");
+  const fourNum = document.querySelector<HTMLDivElement>(".num.four");
+
+  function fmt(value: number, kind: string, suffix: string): string {
+    const n = kind === "fixed1" ? value.toFixed(1) : String(Math.round(value));
+    return `${n}${suffix}`;
+  }
+
+  function update(t: number) {
+    cards.forEach((card) => {
+      const five = parseFloat(card.dataset.five || "0");
+      const four = parseFloat(card.dataset.four || "0");
+      const direction = card.dataset.direction || "down";
+      const kind = card.dataset.fmt || "round";
+      const suffix = card.dataset.suffix || "";
+      const v = five + (four - five) * t;
+
+      const valEl = card.querySelector<HTMLDivElement>("[data-val]");
+      const barEl = card.querySelector<HTMLDivElement>("[data-bar]");
+      if (valEl) valEl.textContent = fmt(v, kind, suffix);
+
+      const better = (direction === "down" && v < five) || (direction === "up" && v > five);
+      card.classList.toggle("is-better", better && t > 0.01);
+
+      if (barEl) {
+        const denom = Math.max(five, four) || 1;
+        const pct = Math.abs((v - five) / denom) * 100;
+        barEl.style.width = `${pct}%`;
+      }
+    });
+
+    if (fiveNum && fourNum) {
+      fiveNum.classList.toggle("active", t < 0.5);
+      fourNum.classList.toggle("active", t >= 0.5);
+    }
+
+    if (blendText) {
+      if (t < 0.05) blendText.textContent = "A traditional five-day week.";
+      else if (t > 0.95) blendText.textContent = "A standard 4DWG-style four-day week.";
+      else blendText.textContent = `${Math.round((1 - t) * 100)}% old / ${Math.round(t * 100)}% new — a hybrid arrangement.`;
+    }
+  }
+
+  slider?.addEventListener("input", (e) => {
+    const t = parseFloat((e.target as HTMLInputElement).value);
+    update(t);
+  });
+  update(0);
+</script>

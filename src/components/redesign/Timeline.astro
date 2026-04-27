@@ -1,0 +1,262 @@
+---
+import { timeline } from "../../lib/workweekData";
+const lastIdx = timeline.length - 1;
+---
+
+<section id="timeline" class="fdw-tl">
+  <div class="fdw-eyebrow accent">Timeline · A century of working hours</div>
+  <h2 class="fdw-headline is-roman">
+    Every workweek was once unthinkable.<br />
+    <span class="accent">Until it wasn't.</span>
+  </h2>
+
+  <div class="tl-strip" role="presentation">
+    <div class="tl-strip-track" data-progress style={`--pct:${((lastIdx + 1) / timeline.length) * 100}%`}></div>
+    {timeline.map((e, i) => (
+      <button
+        class={`tl-dot${i === lastIdx ? " is-active" : ""}${i <= lastIdx ? " is-passed" : ""}`}
+        data-idx={i}
+        type="button"
+        aria-label={`Year ${e.year}`}
+        style={`left:${(i / (timeline.length - 1)) * 100}%`}
+      ></button>
+    ))}
+  </div>
+
+  <div class="tl-years">
+    {timeline.map((e, i) => (
+      <div class={`tl-year${i === lastIdx ? " is-active" : ""}`} data-year-label={i}>{e.year}</div>
+    ))}
+  </div>
+
+  <div class="tl-display">
+    <div class="tl-bigyear" data-bigyear>{timeline[lastIdx].year}</div>
+    <div class="tl-text">
+      <p class="tl-caption" data-caption>{timeline[lastIdx].label}</p>
+      <a
+        class="tl-source"
+        data-source-link
+        href={timeline[lastIdx].url ?? "#"}
+        target="_blank"
+        rel="noopener"
+        hidden={!timeline[lastIdx].url}
+      >
+        <span data-source-label>{timeline[lastIdx].sourceLabel ? `Read on ${timeline[lastIdx].sourceLabel}` : ""}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <button type="button" class="fdw-btn is-ghost tl-toggle" data-toggle aria-pressed="true">⏸ Pause</button>
+</section>
+
+<style>
+  .fdw-tl {
+    padding: 120px 48px;
+    background: var(--paper);
+  }
+  .fdw-tl .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .fdw-tl .fdw-headline {
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.96;
+    margin-top: 16px;
+    max-width: 1100px;
+  }
+  .fdw-tl .fdw-headline .accent { color: var(--accent); }
+
+  .tl-strip {
+    margin-top: 64px;
+    position: relative;
+    height: 4px;
+    background: var(--rule);
+    border-radius: 999px;
+  }
+  .tl-strip-track {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    width: var(--pct, 0%);
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.8s var(--ease-standard);
+  }
+  .tl-dot {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    border: none;
+    background: var(--ink);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s var(--ease-standard);
+  }
+  .tl-dot.is-passed { background: var(--accent); }
+  .tl-dot.is-active {
+    width: 22px;
+    height: 22px;
+    background: var(--accent);
+    box-shadow: 0 0 0 6px rgba(255, 96, 77, 0.2);
+  }
+
+  .tl-years {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .tl-year {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-4);
+    transition: color 0.2s var(--ease-standard);
+  }
+  .tl-year.is-active { color: var(--accent); font-weight: 600; }
+
+  .tl-display {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: flex-start;
+  }
+  .tl-bigyear {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(96px, 14vw, 200px);
+    line-height: 0.85;
+    color: var(--ink);
+    letter-spacing: -0.04em;
+  }
+  .tl-text {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .tl-caption {
+    font-family: var(--font-editorial);
+    font-size: clamp(20px, 2.5vw, 32px);
+    line-height: 1.3;
+    font-weight: 400;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .tl-source {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid currentColor;
+    padding: 2px 0;
+    transition: opacity 0.15s var(--ease-standard);
+  }
+  .tl-source:hover { opacity: 0.7; }
+  .tl-source[hidden] { display: none; }
+  .tl-toggle { margin-top: 40px; }
+
+  @media (max-width: 900px) {
+    .fdw-tl { padding: 72px 24px; }
+    .tl-display { grid-template-columns: 1fr; gap: 16px; }
+    .tl-years .tl-year:nth-child(even) { display: none; }
+  }
+</style>
+
+<script>
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>(".tl-dot"));
+  const years = Array.from(document.querySelectorAll<HTMLDivElement>(".tl-year"));
+  const bigyear = document.querySelector<HTMLDivElement>("[data-bigyear]");
+  const caption = document.querySelector<HTMLParagraphElement>("[data-caption]");
+  const track = document.querySelector<HTMLDivElement>("[data-progress]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-toggle]");
+
+  type TLEntry = { year: number; label: string; url?: string; sourceLabel?: string };
+  const labels: TLEntry[] = [
+    { year: 1926, label: "Henry Ford adopts the 5-day, 40-hour week at Ford Motor Co.", sourceLabel: "Teaching American History", url: "https://teachingamericanhistory.org/document/henry-fords-five-day-week/" },
+    { year: 2018, label: "Perpetual Guardian (NZ) trials a 4-day week — productivity rises 20%", sourceLabel: "Perpetual Guardian", url: "https://www.perpetualguardian.co.nz/the-four-day-week-is-here/" },
+    { year: 2019, label: "Microsoft Japan reports 40% productivity gain in August trial", sourceLabel: "NPR", url: "https://www.npr.org/2019/11/04/776163853/microsoft-japan-says-4-day-workweek-boosted-workers-productivity-by-40" },
+    { year: 2021, label: 'Iceland publishes results of public-sector trial — declared an "overwhelming success"', sourceLabel: "Autonomy Institute", url: "https://autonomy.work/portfolio/icelandsww/" },
+    { year: 2022, label: "World's largest pilot launches in the UK with 61 companies", sourceLabel: "4 Day Week Global", url: "https://www.4dayweek.com/uk-pilot-results" },
+    { year: 2023, label: "South Africa, Portugal, Spain expand trials; 4DWG runs cohorts in 6 countries", sourceLabel: "4 Day Week Global", url: "https://www.4dayweek.com/research" },
+    { year: 2024, label: "Germany trial: 73% of companies keep the 4-day week after the pilot ends", sourceLabel: "4 Day Week Global", url: "https://www.4dayweek.com/germany-2024-pilot-results" },
+    { year: 2026, label: "Belgium, Iceland, Spain pursue legislative paths; over 60 trials globally", sourceLabel: "American Bar Association", url: "https://www.americanbar.org/groups/labor_law/publications/ilelc_newsletters/issue-winter-2023/belgium-approves-four-day-work-week/" },
+  ];
+
+  const sourceLink = document.querySelector<HTMLAnchorElement>("[data-source-link]");
+  const sourceLabelEl = document.querySelector<HTMLSpanElement>("[data-source-label]");
+
+  let active = labels.length - 1;
+  let auto = true;
+  let timer: number | null = null;
+
+  function setActive(i: number) {
+    active = i;
+    dots.forEach((d, idx) => {
+      d.classList.toggle("is-active", idx === active);
+      d.classList.toggle("is-passed", idx <= active);
+    });
+    years.forEach((y, idx) => y.classList.toggle("is-active", idx === active));
+    if (bigyear) bigyear.textContent = String(labels[active].year);
+    if (caption) {
+      caption.textContent = labels[active].label;
+      caption.classList.remove("fdw-tick");
+      void caption.offsetWidth;
+      caption.classList.add("fdw-tick");
+    }
+    if (sourceLink && sourceLabelEl) {
+      const entry = labels[active];
+      if (entry.url && entry.sourceLabel) {
+        sourceLink.href = entry.url;
+        sourceLabelEl.textContent = `Read on ${entry.sourceLabel}`;
+        sourceLink.hidden = false;
+      } else {
+        sourceLink.hidden = true;
+      }
+    }
+    if (track) track.style.setProperty("--pct", `${((active + 1) / labels.length) * 100}%`);
+  }
+
+  function start() {
+    if (timer) window.clearInterval(timer);
+    timer = window.setInterval(() => setActive((active + 1) % labels.length), 2000);
+  }
+  function stop() {
+    if (timer) window.clearInterval(timer);
+    timer = null;
+  }
+
+  dots.forEach((d, idx) => {
+    d.addEventListener("click", () => {
+      auto = false;
+      stop();
+      if (toggle) {
+        toggle.textContent = "▶ Auto-play";
+        toggle.setAttribute("aria-pressed", "false");
+      }
+      setActive(idx);
+    });
+  });
+
+  toggle?.addEventListener("click", () => {
+    auto = !auto;
+    if (auto) {
+      toggle.textContent = "⏸ Pause";
+      toggle.setAttribute("aria-pressed", "true");
+      start();
+    } else {
+      toggle.textContent = "▶ Auto-play";
+      toggle.setAttribute("aria-pressed", "false");
+      stop();
+    }
+  });
+
+  if (auto) start();
+</script>

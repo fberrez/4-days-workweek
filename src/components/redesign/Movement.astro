@@ -1,0 +1,128 @@
+---
+const policies = [
+  { country: "Iceland", flag: "🇮🇸", detail: "Trade unions secured shorter hours for 86% of the workforce after the 2015–19 trial." },
+  { country: "Spain", flag: "🇪🇸", detail: "Government-funded 3-year trial since 2021 — 200–400 SMEs participating." },
+  { country: "Belgium", flag: "🇧🇪", detail: "Right to request a 4-day week became law in 2022." },
+];
+const partners = [
+  "4 Day Week Global",
+  "Autonomy Institute",
+  "4dayweek.io",
+  "Boston College Center for Work & Family",
+  "WorkFour",
+  "Henley Business School",
+];
+---
+
+<section id="movement" class="fdw-mv">
+  <div class="fdw-eyebrow accent">The Movement</div>
+  <h2 class="fdw-headline is-roman">
+    It is no longer an experiment.<br /><em class="accent">It is policy.</em>
+  </h2>
+
+  <div class="mv-grid">
+    {policies.map((c) => (
+      <article class="mv-card">
+        <div class="cmp-mono lbl"><span class="flag" aria-hidden="true">{c.flag}</span> Policy · Active</div>
+        <div class="country">{c.country}</div>
+        <p class="detail">{c.detail}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="mv-partners">
+    <div class="cmp-mono lbl">Research partners</div>
+    <div class="partners-row">
+      {partners.map((p) => <span class="partner">{p}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fdw-mv {
+    padding: 120px 48px;
+    background: var(--paper-warm);
+  }
+  .fdw-mv .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .fdw-mv .fdw-headline {
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.96;
+    margin-top: 16px;
+    max-width: 1200px;
+  }
+  .fdw-mv .fdw-headline em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .mv-grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .mv-card {
+    padding: 32px;
+    background: var(--paper);
+    border-radius: 16px;
+    border: 1px solid var(--rule);
+  }
+  .mv-card .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mv-card .flag { font-size: 18px; line-height: 1; }
+  .mv-card .country {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 12px;
+    letter-spacing: -0.02em;
+  }
+  .mv-card .detail {
+    font-family: var(--font-editorial);
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin-top: 16px;
+  }
+
+  .mv-partners {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--ink);
+  }
+  .mv-partners .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .partners-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 20px;
+  }
+  .partner {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .fdw-mv { padding: 72px 24px; }
+    .mv-grid { grid-template-columns: 1fr; }
+  }
+</style>

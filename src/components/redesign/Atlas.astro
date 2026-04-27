@@ -1,0 +1,453 @@
+---
+import { trials } from "../../lib/workweekData";
+import { geoEquirectangular, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+import worldData from "world-atlas/countries-110m.json";
+import type { Topology, GeometryCollection } from "topojson-specification";
+import type { FeatureCollection, Geometry } from "geojson";
+
+const W = 1340;
+const H = 620;
+
+const topo = worldData as unknown as Topology;
+const countries = feature(
+  topo,
+  topo.objects.countries as GeometryCollection,
+) as FeatureCollection<Geometry>;
+
+const projection = geoEquirectangular()
+  .scale(W / (2 * Math.PI))
+  .translate([W / 2, H / 2]);
+
+const path = geoPath(projection);
+
+const countryPaths: Array<{ id: string; d: string }> = countries.features
+  .map((f) => ({ id: String(f.id ?? f.properties?.name ?? ""), d: path(f) ?? "" }))
+  .filter((c) => c.d.length > 0);
+
+function projectPoint(lon: number, lat: number): [number, number] {
+  const p = projection([lon, lat]);
+  return p ? [p[0], p[1]] : [W / 2, H / 2];
+}
+
+const totalEmployees = trials.reduce((s, t) => s + t.employees, 0);
+const continued = trials.filter((t) => t.continued).length;
+const continuedPct = Math.round((continued / trials.length) * 100);
+
+const markers = trials.map((t) => {
+  const [x, y] = projectPoint(t.lon, t.lat);
+  const r = Math.max(8, Math.min(28, Math.sqrt(t.employees) / 3));
+  return { ...t, x, y, r };
+});
+
+// graticule (15° lat/lon grid) — light reference lines
+const lonLines: string[] = [];
+for (let lon = -180; lon <= 180; lon += 30) {
+  const pts: string[] = [];
+  for (let lat = -85; lat <= 85; lat += 5) {
+    const [x, y] = projectPoint(lon, lat);
+    pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+  }
+  lonLines.push(`M${pts.join("L")}`);
+}
+const latLines: string[] = [];
+for (let lat = -60; lat <= 75; lat += 30) {
+  const pts: string[] = [];
+  for (let lon = -180; lon <= 180; lon += 5) {
+    const [x, y] = projectPoint(lon, lat);
+    pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+  }
+  latLines.push(`M${pts.join("L")}`);
+}
+---
+
+<section id="atlas" class="fdw-atlas">
+  <div class="fdw-eyebrow accent">The 4-Day Atlas · 2018 → 2026</div>
+
+  <div class="atlas-head">
+    <h2 class="fdw-headline is-roman">
+      One day off.<br />
+      <span class="accent">Sixty trials.</span><br />
+      Fifteen countries.
+    </h2>
+    <p class="atlas-lede">
+      A live atlas of every documented four-day workweek pilot since 2018.
+      Hover a dot to see what they found. Coloured red where the trial was
+      kept, grey where it was reversed.
+    </p>
+  </div>
+
+  <div class="atlas-map-wrap">
+    <svg viewBox={`0 0 ${W} ${H}`} class="atlas-map" role="img" aria-label="World map showing 4-day workweek pilot locations">
+      <defs>
+        <pattern id="atlas-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+        </pattern>
+      </defs>
+
+      <rect x="0" y="0" width={W} height={H} fill="url(#atlas-hatch)" />
+
+      <g class="atlas-graticule">
+        {lonLines.map((d) => <path d={d} fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />)}
+        {latLines.map((d) => <path d={d} fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />)}
+      </g>
+
+      <g class="atlas-countries">
+        {countryPaths.map((c) => (
+          <path
+            d={c.d}
+            fill="rgba(255,255,255,0.07)"
+            stroke="rgba(255,255,255,0.22)"
+            stroke-width="0.6"
+            stroke-linejoin="round"
+          />
+        ))}
+      </g>
+
+      {markers.map((m) => (
+        <a
+          class="atlas-mark"
+          href={m.url ?? "#"}
+          target="_blank"
+          rel="noopener"
+          data-name={m.name}
+          data-year={m.year}
+          data-country={m.country}
+          data-prod={m.productivity ?? ""}
+          data-employees={m.employees}
+          data-source={m.source}
+          aria-label={`${m.name}, ${m.country}, ${m.year} — open ${m.source} source`}
+        >
+          <circle cx={m.x} cy={m.y} r={m.r + 8} fill="rgba(255,96,77,0.12)" />
+          <circle class="dot" cx={m.x} cy={m.y} r={m.r} fill={m.continued ? "var(--accent)" : "#818A92"} stroke="#0E141B" stroke-width="2" />
+        </a>
+      ))}
+
+      <a class="atlas-tip-link" href="#" target="_blank" rel="noopener" style="display:none;">
+        <g class="atlas-tip">
+          <rect class="tip-bg" x="0" y="0" width="220" height="92" rx="8" fill="#F8F4EC" />
+          <text class="tip-name" x="0" y="0" font-family="DM Sans, sans-serif" font-weight="700" font-size="13" fill="#0E141B"></text>
+          <text class="tip-meta" x="0" y="0" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.1em" fill="#4A5C70"></text>
+          <text class="tip-staff" x="0" y="0" font-family="DM Sans, sans-serif" font-weight="600" font-size="11" fill="#0E141B"></text>
+          <text class="tip-prod" x="0" y="0" font-family="DM Sans, sans-serif" font-weight="600" font-size="11" fill="#FF604D"></text>
+          <text class="tip-source" x="0" y="0" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="0.08em" fill="#FF604D" text-decoration="underline"></text>
+        </g>
+      </a>
+    </svg>
+
+    <div class="atlas-stats">
+      <div class="atlas-stat">
+        <div class="big">{trials.length}</div>
+        <div class="lbl">documented trials</div>
+      </div>
+      <div class="atlas-stat">
+        <div class="big">{(totalEmployees / 1000).toFixed(1)}K</div>
+        <div class="lbl">workers in pilots</div>
+      </div>
+      <div class="atlas-stat">
+        <div class="big">{continuedPct}%</div>
+        <div class="lbl">kept the change</div>
+      </div>
+    </div>
+
+    <div class="atlas-legend">
+      <span class="legend-group">
+        <span class="legend-item"><span class="sw" style="background:var(--accent);"></span> Continued</span>
+        <span class="legend-item"><span class="sw" style="background:#818A92;"></span> Reversed</span>
+      </span>
+      <span class="legend-divider" aria-hidden="true"></span>
+      <span class="legend-group" aria-label="Marker size encodes pilot headcount">
+        <span class="legend-label">Pilot size</span>
+        <span class="legend-scale">
+          <span class="sw size-s" title="≈ 80 workers"></span>
+          <span class="sw size-m" title="≈ 600 workers"></span>
+          <span class="sw size-l" title="≈ 3 000 workers"></span>
+        </span>
+        <span class="legend-range">80 → 3 000 workers</span>
+      </span>
+    </div>
+
+    <div class="atlas-attribution">Boundaries · Natural Earth (public domain)</div>
+  </div>
+</section>
+
+<style>
+  .fdw-atlas {
+    padding: 96px 48px 80px;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .fdw-atlas .fdw-eyebrow.accent { color: var(--accent); font-weight: 500; }
+  .atlas-head {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    margin-top: 16px;
+    align-items: end;
+  }
+  .atlas-head .fdw-headline {
+    font-size: clamp(48px, 7vw, 124px);
+    line-height: 0.94;
+    color: var(--paper);
+  }
+  .atlas-head .fdw-headline .accent { color: var(--accent); }
+  .atlas-lede {
+    font-family: var(--font-editorial);
+    font-size: 19px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 480px;
+  }
+
+  .atlas-map-wrap {
+    margin-top: 56px;
+    position: relative;
+    background: #0e141b;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .atlas-map {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .atlas-mark { cursor: pointer; }
+  .atlas-mark .dot {
+    transition: transform 0.2s var(--ease-standard);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .atlas-mark:hover .dot,
+  .atlas-mark:focus .dot { transform: scale(1.3); }
+
+  .atlas-stats {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .atlas-stat {
+    background: rgba(34, 50, 66, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    min-width: 240px;
+  }
+  .atlas-stat .big {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .atlas-stat .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+  }
+  .atlas-legend {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    background: rgba(34, 50, 66, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 10px 16px;
+    border-radius: 999px;
+  }
+  .legend-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .legend-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .legend-item,
+  .legend-label,
+  .legend-range {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+  }
+  .legend-label { color: rgba(255, 255, 255, 0.45); }
+  .legend-range { color: rgba(255, 255, 255, 0.5); }
+  .legend-item .sw {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+  }
+  .legend-scale {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-scale .sw {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(14, 20, 27, 0.6);
+    display: inline-block;
+  }
+  .legend-scale .size-s { width: 6px; height: 6px; }
+  .legend-scale .size-m { width: 12px; height: 12px; }
+  .legend-scale .size-l { width: 20px; height: 20px; }
+  .atlas-attribution {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .fdw-atlas { padding: 64px 24px; }
+    .atlas-head { grid-template-columns: 1fr; gap: 24px; }
+    .atlas-stats { position: static; padding: 16px; flex-direction: row; flex-wrap: wrap; }
+    .atlas-stat { min-width: 0; flex: 1 1 180px; }
+    .atlas-legend { position: static; margin: 12px 16px 16px; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .legend-divider { display: none; }
+    .atlas-attribution { position: static; padding: 0 16px 12px; }
+  }
+</style>
+
+<script>
+  const marks = document.querySelectorAll<SVGAElement>(".atlas-mark");
+  const tipLink = document.querySelector<SVGAElement>(".atlas-tip-link");
+  const tip = document.querySelector<SVGGElement>(".atlas-tip");
+  if (tip && tipLink) {
+    const tipName = tip.querySelector<SVGTextElement>(".tip-name");
+    const tipMeta = tip.querySelector<SVGTextElement>(".tip-meta");
+    const tipStaff = tip.querySelector<SVGTextElement>(".tip-staff");
+    const tipProd = tip.querySelector<SVGTextElement>(".tip-prod");
+    const tipSource = tip.querySelector<SVGTextElement>(".tip-source");
+    const tipBg = tip.querySelector<SVGRectElement>(".tip-bg");
+
+    const MAP_W = 1340;
+    const MAP_H = 620;
+    const PAD = 6;
+    const HIDE_GRACE_MS = 220;
+    let hideTimer: number | null = null;
+    const cancelHide = () => {
+      if (hideTimer != null) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    };
+
+    function showTip(a: SVGAElement) {
+      cancelHide();
+      const dot = a.querySelector<SVGCircleElement>(".dot");
+      if (!dot) return;
+      const cx = parseFloat(dot.getAttribute("cx") || "0");
+      const cy = parseFloat(dot.getAttribute("cy") || "0");
+      const r = parseFloat(dot.getAttribute("r") || "0");
+      const name = a.dataset.name || "";
+      const year = a.dataset.year || "";
+      const country = a.dataset.country || "";
+      const prod = a.dataset.prod || "";
+      const source = a.dataset.source || "";
+      const url = a.getAttribute("href") || "";
+      const employees = parseInt(a.dataset.employees || "0", 10);
+      const hasProd = prod !== "";
+      const hasSource = source !== "" && url !== "" && url !== "#";
+
+      if (hasSource) {
+        tipLink!.setAttribute("href", url);
+      } else {
+        tipLink!.removeAttribute("href");
+      }
+
+      const w = Math.max(200, name.length * 7 + 40);
+      const baseH = hasProd ? 74 : 60;
+      const h = hasSource ? baseH + 18 : baseH;
+      const offset = r + 8;
+
+      let tipX = cx + offset;
+      let tipY = cy - h / 2;
+
+      if (tipX + w + PAD > MAP_W) tipX = cx - offset - w;
+      if (tipX < PAD) tipX = PAD;
+      if (tipY < PAD) tipY = PAD;
+      if (tipY + h + PAD > MAP_H) tipY = MAP_H - PAD - h;
+
+      tipBg?.setAttribute("x", String(tipX));
+      tipBg?.setAttribute("y", String(tipY));
+      tipBg?.setAttribute("width", String(w));
+      tipBg?.setAttribute("height", String(h));
+
+      if (tipName) {
+        tipName.setAttribute("x", String(tipX + 10));
+        tipName.setAttribute("y", String(tipY + 18));
+        tipName.textContent = name;
+      }
+      if (tipMeta) {
+        tipMeta.setAttribute("x", String(tipX + 10));
+        tipMeta.setAttribute("y", String(tipY + 34));
+        tipMeta.textContent = `${year} · ${country}`;
+      }
+      if (tipStaff) {
+        tipStaff.setAttribute("x", String(tipX + 10));
+        tipStaff.setAttribute("y", String(tipY + 50));
+        tipStaff.textContent = employees ? `${employees.toLocaleString()} workers` : "";
+      }
+      if (tipProd) {
+        tipProd.setAttribute("x", String(tipX + 10));
+        tipProd.setAttribute("y", String(tipY + 64));
+        tipProd.textContent = hasProd ? `+${prod}% productivity` : "";
+      }
+      if (tipSource) {
+        tipSource.setAttribute("x", String(tipX + 10));
+        tipSource.setAttribute("y", String(tipY + h - 10));
+        tipSource.textContent = hasSource ? `↗ READ ${source.toUpperCase()}` : "";
+      }
+
+      tipLink!.style.display = "";
+      tipLink!.style.pointerEvents = hasSource ? "auto" : "none";
+      tipLink!.style.cursor = hasSource ? "pointer" : "default";
+      tipLink!.parentNode?.appendChild(tipLink!);
+    }
+
+    function scheduleHide() {
+      cancelHide();
+      hideTimer = window.setTimeout(() => {
+        tipLink!.style.display = "none";
+        hideTimer = null;
+      }, HIDE_GRACE_MS);
+    }
+
+    marks.forEach((a) => {
+      a.addEventListener("mouseenter", () => showTip(a));
+      a.addEventListener("focus", () => showTip(a));
+      a.addEventListener("mouseleave", scheduleHide);
+      a.addEventListener("blur", scheduleHide);
+    });
+    tipLink.addEventListener("mouseenter", cancelHide);
+    tipLink.addEventListener("mouseleave", scheduleHide);
+    tipLink.addEventListener("focus", cancelHide);
+    tipLink.addEventListener("blur", scheduleHide);
+  }
+</script>
