@@ -1,55 +1,30 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
 import { generateOgImage } from "../../lib/og";
-import { slugFromId } from "../../i18n";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getCollection("research");
-
-  const paths = [
-    // Home pages
+  return [
     {
       params: { path: "en/home" },
       props: {
-        title: "The 4-Day Workweek",
+        title: "Drop a day. Keep the work.",
         description:
-          "Evidence-based research on the benefits of reducing work to four days a week.",
+          "Evidence from 60+ global trials of the 4-day workweek. Compare 5 vs 4. See the atlas. Calculate what your company would save.",
         lang: "en",
+        variant: "home" as const,
       },
     },
-    {
-      params: { path: "fr/home" },
-      props: {
-        title: "La semaine de 4 jours",
-        description:
-          "Recherches factuelles sur les avantages de la semaine de travail de quatre jours.",
-        lang: "fr",
-      },
-    },
-    // Article pages
-    ...articles.map((article) => ({
-      params: {
-        path: `${article.data.lang}/${slugFromId(article.id)}`,
-      },
-      props: {
-        title: article.data.title,
-        description: article.data.description,
-        lang: article.data.lang,
-      },
-    })),
   ];
-
-  return paths;
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const { title, description, lang } = props as {
+  const { title, description, lang, variant } = props as {
     title: string;
     description: string;
     lang: string;
+    variant: "home" | "article";
   };
 
-  const png = await generateOgImage(title, description, lang);
+  const png = await generateOgImage(title, description, lang, variant);
 
   return new Response(png, {
     headers: {

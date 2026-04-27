@@ -1,4 +1,67 @@
+# The 4-Day Workweek — robots.txt
+# Open to all crawlers, including LLM training & retrieval.
+
 User-agent: *
 Allow: /
 
+# Explicit allowlist for major AI / LLM crawlers (no-ops for the wildcard above,
+# but keeps intent clear for future tightening if ever needed).
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 Sitemap: https://4-days-workweek-production.up.railway.app/sitemap-index.xml
+
+# Generative-engine signal (llms.txt convention)
+# https://llmstxt.org
+LLM-Content: https://4-days-workweek-production.up.railway.app/llms.txt

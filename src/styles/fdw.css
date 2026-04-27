@@ -187,6 +187,16 @@
   .fdw .fdw-section { padding: 64px 24px; }
 }
 
+/* Anchor jump offset — sticky masthead is ~76px; reserve a hair more */
+.fdw section[id],
+.fdw [id$="trials"],
+.fdw [id$="atlas"] {
+  scroll-margin-top: 96px;
+}
+@media (max-width: 900px) {
+  .fdw section[id] { scroll-margin-top: 80px; }
+}
+
 .fdw .fdw-pulse-dot {
   width: 8px;
   height: 8px;
@@ -212,3 +222,21 @@
   text-decoration: none;
 }
 .fdw .skip-link:focus { top: 0.5rem; }
+
+/* =========================================================================
+   Reduced motion — honor user preference
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .fdw *,
+  .fdw *::before,
+  .fdw *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Atlas live-counter pulse + arrow auto-rotate become no-ops */
+  .fdw .fdw-pulse-dot { animation: none !important; }
+  /* Hero day-pill stagger: skip the off-screen start state */
+  .fdw .fdw-week-days .day { opacity: 1 !important; transform: none !important; }
+}

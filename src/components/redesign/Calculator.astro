@@ -176,6 +176,12 @@ const total = turnover + sick + energy;
     .calc-grid { grid-template-columns: 1fr; gap: 32px; }
     .calc-result { padding: 28px; }
   }
+  @media (max-width: 480px) {
+    .calc-result { padding: 22px; }
+    .calc-control .val { font-size: 22px; }
+    .calc-result .line { font-size: 14px; }
+    .calc-result .line .num { font-size: 18px; }
+  }
 </style>
 
 <script>

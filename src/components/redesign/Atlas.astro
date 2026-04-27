@@ -332,13 +332,21 @@ for (let lat = -60; lat <= 75; lat += 30) {
     .legend-divider { display: none; }
     .atlas-attribution { position: static; padding: 0 16px 12px; }
   }
+  @media (max-width: 480px) {
+    .atlas-stat { flex: 1 1 100%; }
+    .atlas-stat .big { font-size: 22px; }
+    .legend-item, .legend-label, .legend-range { font-size: 9px; }
+  }
 </style>
 
 <script>
   const marks = document.querySelectorAll<SVGAElement>(".atlas-mark");
   const tipLink = document.querySelector<SVGAElement>(".atlas-tip-link");
   const tip = document.querySelector<SVGGElement>(".atlas-tip");
-  if (tip && tipLink) {
+  // On primary-touch (phones) the in-SVG tooltip text is too small to read;
+  // skip the hover overlay entirely and let the marker behave as a plain link.
+  const isCoarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  if (tip && tipLink && !isCoarsePointer) {
     const tipName = tip.querySelector<SVGTextElement>(".tip-name");
     const tipMeta = tip.querySelector<SVGTextElement>(".tip-meta");
     const tipStaff = tip.querySelector<SVGTextElement>(".tip-staff");

@@ -45,7 +45,10 @@ const headlineStats: Array<[string, string]> = [
     </div>
 
     <div class="fdw-arrow-wrap">
-      <span class="fdw-arrow" aria-hidden="true">→</span>
+      <span class="fdw-arrow" aria-hidden="true">
+        <span class="fdw-arrow-h">→</span>
+        <span class="fdw-arrow-v">↓</span>
+      </span>
     </div>
 
     <div class="fdw-week-block four">
@@ -195,6 +198,7 @@ const headlineStats: Array<[string, string]> = [
   .fdw-arrow.is-spin {
     transform: rotate(360deg) scale(1.15);
   }
+  .fdw-arrow-v { display: none; }
   .fdw-hero-stats {
     display: flex;
     gap: 56px;
@@ -224,8 +228,15 @@ const headlineStats: Array<[string, string]> = [
       grid-template-columns: 1fr;
       gap: 16px;
     }
-    .fdw-arrow-wrap { transform: rotate(90deg); padding: 8px 0; }
-    .fdw-hero-stats { gap: 28px; }
+    .fdw-arrow-wrap { padding: 4px 0; }
+    .fdw-arrow-h { display: none; }
+    .fdw-arrow-v { display: inline; }
+    .fdw-arrow.is-spin { transform: scale(1.15); }
+    .fdw-hero-stats { gap: 24px; }
+    .fdw-hero-stats > div { flex: 1 1 calc(50% - 12px); }
+    .fdw-week-block { padding: 24px; }
+    .fdw-week-days { height: 88px; }
+    .metric-value { font-size: 28px; }
   }
 </style>
 
@@ -234,7 +245,8 @@ const headlineStats: Array<[string, string]> = [
   blocks.forEach((b) => requestAnimationFrame(() => b.classList.add("is-in")));
 
   const arrow = document.querySelector<HTMLSpanElement>(".fdw-arrow");
-  if (arrow) {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (arrow && !reduceMotion) {
     let on = false;
     setInterval(() => {
       on = !on;

@@ -193,8 +193,9 @@ const lastIdx = timeline.length - 1;
   const sourceLink = document.querySelector<HTMLAnchorElement>("[data-source-link]");
   const sourceLabelEl = document.querySelector<HTMLSpanElement>("[data-source-label]");
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let active = labels.length - 1;
-  let auto = true;
+  let auto = !reduceMotion;
   let timer: number | null = null;
 
   function setActive(i: number) {
@@ -258,5 +259,11 @@ const lastIdx = timeline.length - 1;
     }
   });
 
-  if (auto) start();
+  if (auto) {
+    start();
+  } else if (toggle && reduceMotion) {
+    // Reflect the initial paused state in the toggle button
+    toggle.textContent = "▶ Auto-play";
+    toggle.setAttribute("aria-pressed", "false");
+  }
 </script>
