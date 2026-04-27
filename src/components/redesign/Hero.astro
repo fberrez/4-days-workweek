@@ -115,8 +115,8 @@ const headlineStats: Array<[string, string]> = [
     display: flex;
     flex-direction: column;
   }
-  .fdw-week-block.five { background: #fffcf6; }
-  .fdw-week-block.four { background: #fff2f1; }
+  .fdw-week-block.five { background: var(--bg-warm-cream); }
+  .fdw-week-block.four { background: var(--bg-accent-soft); }
   .fdw-week-label {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -152,9 +152,9 @@ const headlineStats: Array<[string, string]> = [
   }
   .fdw-week-days .day.active.accent { background: var(--accent); }
   .fdw-week-days .day.off {
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px dashed rgba(0, 0, 0, 0.15);
-    color: rgba(0, 0, 0, 0.3);
+    background: rgba(var(--ink-rgb), 0.04);
+    border: 1px dashed rgba(var(--ink-rgb), 0.15);
+    color: rgba(var(--ink-rgb), 0.3);
   }
   .fdw-week-block.is-in .day { opacity: 1; transform: none; }
   .fdw-week-metrics {

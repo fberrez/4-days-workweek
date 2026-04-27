@@ -4,14 +4,6 @@ const policies = [
   { country: "Spain", flag: "🇪🇸", detail: "Government-funded 3-year trial since 2021 — 200–400 SMEs participating." },
   { country: "Belgium", flag: "🇧🇪", detail: "Right to request a 4-day week became law in 2022." },
 ];
-const partners = [
-  "4 Day Week Global",
-  "Autonomy Institute",
-  "4dayweek.io",
-  "Boston College Center for Work & Family",
-  "WorkFour",
-  "Henley Business School",
-];
 ---
 
 <section id="movement" class="fdw-mv">
@@ -28,13 +20,6 @@ const partners = [
         <p class="detail">{c.detail}</p>
       </article>
     ))}
-  </div>
-
-  <div class="mv-partners">
-    <div class="cmp-mono lbl">Research partners</div>
-    <div class="partners-row">
-      {partners.map((p) => <span class="partner">{p}</span>)}
-    </div>
   </div>
 </section>
 
@@ -93,32 +78,6 @@ const partners = [
     line-height: 1.45;
     color: var(--ink-2);
     margin-top: 16px;
-  }
-
-  .mv-partners {
-    margin-top: 80px;
-    padding-top: 40px;
-    border-top: 1px solid var(--ink);
-  }
-  .mv-partners .lbl {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--ink-3);
-    text-transform: uppercase;
-  }
-  .partners-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    margin-top: 20px;
-  }
-  .partner {
-    font-family: var(--font-editorial);
-    font-style: italic;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--ink);
   }
 
   @media (max-width: 900px) {

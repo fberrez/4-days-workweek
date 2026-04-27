@@ -168,12 +168,25 @@ const keywords = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem("fdw-theme");
+          if (saved === "dark" || saved === "light") {
+            document.documentElement.setAttribute("data-theme", saved);
+          }
+        } catch (_e) {
+          /* localStorage may be unavailable; fall back to system preference */
+        }
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords.join(", ")} />
     <meta name="author" content="The 4-Day Workweek" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <meta name="theme-color" content="#FF604D" />
+    <meta name="theme-color" content="#F8F4EC" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131A22" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
     <meta name="format-detection" content="telephone=no" />
 

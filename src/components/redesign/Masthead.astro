@@ -18,9 +18,30 @@ const navItems = [
       <a href={`#${n.id}`}>{n.label}</a>
     ))}
   </nav>
-  <a href="#calculator" class="fdw-btn is-accent fdw-mast-cta">
-    Pitch this to your CEO →
-  </a>
+  <div class="fdw-mast-tail">
+    <button
+      type="button"
+      class="fdw-theme-toggle"
+      data-theme-toggle
+      aria-label="Toggle theme"
+      title="Toggle theme"
+    >
+      <span class="t-sun" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </span>
+      <span class="t-moon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </span>
+    </button>
+    <a href="#calculator" class="fdw-btn is-accent fdw-mast-cta">
+      Pitch this to your CEO →
+    </a>
+  </div>
 </header>
 
 <style>
@@ -30,7 +51,7 @@ const navItems = [
     justify-content: space-between;
     gap: 24px;
     padding: 16px 48px;
-    background: rgba(255, 246, 237, 0.9);
+    background: rgba(var(--paper-rgb), 0.88);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
@@ -55,6 +76,51 @@ const navItems = [
   .fdw-mast-nav a:hover { color: var(--accent); }
   .fdw-logo .logo-text { font-style: normal; }
   .fdw-logo .dot { color: var(--accent); }
+
+  .fdw-mast-tail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fdw-theme-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.15s var(--ease-standard);
+    padding: 0;
+  }
+  .fdw-theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .fdw-theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .fdw-theme-toggle .t-sun,
+  .fdw-theme-toggle .t-moon {
+    display: grid;
+    place-items: center;
+    line-height: 0;
+  }
+  /* By default (light mode) → show moon icon (clicking switches to dark). */
+  .fdw-theme-toggle .t-sun { display: none; }
+  /* In dark mode → show sun icon. */
+  :root[data-theme="dark"] .fdw-theme-toggle .t-moon,
+  :root[data-theme="dark"] .fdw-theme-toggle .t-sun { display: none; }
+  :root[data-theme="dark"] .fdw-theme-toggle .t-sun { display: grid; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .fdw-theme-toggle .t-moon { display: none; }
+    :root:not([data-theme="light"]) .fdw-theme-toggle .t-sun { display: grid; }
+  }
+
   @media (max-width: 900px) {
     .fdw-masthead { padding: 14px 20px; gap: 12px; }
     .fdw-mast-nav { display: none; }
@@ -65,5 +131,49 @@ const navItems = [
     .fdw-mast-cta { display: none; }
     .fdw-logo { font-size: 17px; gap: 8px; }
     .fdw-logo .mark { width: 24px; height: 24px; font-size: 12px; }
+    .fdw-theme-toggle { width: 32px; height: 32px; }
   }
 </style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const root = document.documentElement;
+
+  function currentTheme(): "light" | "dark" {
+    const explicit = root.getAttribute("data-theme");
+    if (explicit === "light" || explicit === "dark") return explicit;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function applyAriaLabel() {
+    if (!btn) return;
+    const t = currentTheme();
+    btn.setAttribute(
+      "aria-label",
+      t === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+    btn.setAttribute(
+      "title",
+      t === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+  }
+
+  btn?.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("fdw-theme", next);
+    } catch (_e) {
+      /* localStorage may be unavailable in some contexts */
+    }
+    applyAriaLabel();
+  });
+
+  // React to system preference changes when user hasn't set an explicit override
+  const mql = window.matchMedia("(prefers-color-scheme: dark)");
+  mql.addEventListener?.("change", () => {
+    if (!root.getAttribute("data-theme")) applyAriaLabel();
+  });
+
+  applyAriaLabel();
+</script>
